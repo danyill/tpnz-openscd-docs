@@ -1,0 +1,62 @@
+*Add new DA*
+
+image::https://user-images.githubusercontent.com/66802940/133857899-b0ccdbb7-6125-4df7-8c1d-f2eb31820973.png[alt text,250]
+
+You can utilize OpenSCD to add new ``DA``s to an existing `DOType`. Here's how:
+
+. Navigate to the `DOType` you want to edit and open the *Edit DOType* wizard.
+. Click on the *DATA ATTRIBUTE* button in the middle of the wizard.
+
+_Settings_:
+
+. *name**: If you intend to include a `BDA` from the IEC 61850 namespace, refer to the guidelines provided in the IEC 61850-7-4 standard. Alternatively, if you are creating a custom BDA, ensure that its name begins with a lowercase letter (a-z).
+. *desc*: A user-defined description field for additional information about the attribute.
+. *bType*_: The basic type of the attribute. If it is an *Enum_ or _Struct_, the *type* field must not be empty.
+. *type*_: While the type is defined as a string in the SCL, in OpenSCD, it is presented as a selector. If *bType* is *Struct_, the selector displays all `DAType` - ``id``'s available in the project. However, it's important to note that without existing `DAType` in the project, you cannot create a `BDA`. Conversely, if *bType* is _Enum_, the selector showcases all `EnumType` - ``id``'s present in the project.
+. *sAddr*: User-defined string to describe a short address for the attribute.
+. *valKind*: This attribute may be absent, and if present, it must be either set to true or false.
+. *valImport*: This attribute may be absent, and if present, it must be either set to true or false.
+. *Val*: Allows you to pre-define the value offline. This can be added to any data attribute (`DA` or `BDA`).
+. *dchg*: Specifies data change according to IEC 61850-7-3 for this particular data attribute.
+. *qchg*: Specifies quality change. It is true for all `DA` with the name _a_, otherwise, it is empty.
+. *dupd*: Specifies data update according to IEC 61850-7-3 for this particular data attribute.
+. *fc*: Specifies the functional constraint according to IEC 61850-7-3 for this particular data attribute.
+
+NOTE: The definition of `Val` may not be relevant for all functional constraints (`FC`). For instance, defining a value for a status-type data attribute like `stVal` may not be meaningful. However, for other data attributes, pre-defining the value can be beneficial, such as for `ctlModel`.
+
+NOTE: Starting from Edition 2, you cannot create custom common data classes (CDC) and must use predefined CDCs from IEC 61850-7-3 for user-defined data objects. Therefore, the data attributes are already defined. Please refer to the relevant tables to set the attributes `dchg`, `qchg`, `dupd`, and `fc`.
+
+image::https://user-images.githubusercontent.com/66802940/132106055-277fff5a-9b59-4454-be8d-fd4d4049d056.png[alt text,250]
+
+*Edit DA*
+
+You can use OpenSCD to modify existing `DA` elements. Here's how:
+
+. Navigate to the list of `DOType` in the *Template Editor*.
+. Select the `DOType` that contains the `DA` you want to modify.
+. Click on the specific child `DA` you wish to edit.
+
+_Settings_:
+
+The settings are similar to those in the *Add DA* wizard, with the addition of a remove button for deletion.
+
+_Example:_
+
+----
+<DA name="ctlModel" bType="Enum" fc="CF" type="CtlModelKind">
+    <Val>sbo-with-enhanced-security</Val>
+</DA>
+----
+
+&nbsp;
+
+*Remove DA*
+
+To delete a `DA`:
+
+. Open the *Edit DA* wizard.
+. Click on the *Remove* button.
+
+____
+*WARNING:* Be cautious when removing elements, as OpenSCD does not verify the action's validity before execution.
+____

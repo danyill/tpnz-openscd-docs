@@ -1,0 +1,11 @@
+As an example, this page shows how to import a `DAType` from the templates database. For instance, the `PulseConfig`.
+
+. Open the *Template editor*.
+. Click the *Add DAType* button.
+. Select _PulseConfig_ from the *values*.
+. Don't forget the *id* field.
+. Click on *Save*.
+
+OpenSCD automatically imports all elements required for a valid definition of a `DAType`. When you perform this action with an empty project, your result should resemble the following:
+
+image::https://user-images.githubusercontent.com/66802940/133637394-354eba41-a4b6-4e3c-9458-88b1e608866c.png[grafik]

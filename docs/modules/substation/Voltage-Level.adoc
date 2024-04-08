@@ -1,0 +1,54 @@
+*Create Voltage Level*
+
+image::https://user-images.githubusercontent.com/66802940/183957372-fbeafeda-9b33-4af6-bc8a-e9f3a14e152d.png[grafik,250]
+
+To create a new `VoltageLevel` element within a `Substation` element, follow these steps:
+
+* Navigate to the *Substation* editor
+* Select the *Substation* where you intend to add the voltage level.
+* Click on the *Add mode* button located in the upper right corner of the *Substation* pane.
+* Complete all required fields.
+* Click on the *Add* button.
+
+The creation wizard allows you to configure the following parameters:
+
+* `name`: a unique identifier for the voltage level within the parent substation.
+* `desc`: a human-readable description.
+* `nomFreq`: the nominal frequency of the voltage level (e.g. 50Hz/60Hz/16.6Hz).
+* `numPhases`: the number of phases.
+* `Voltage`: the voltage of the voltage level (combination of value and multiplier).
+
+*Edit Voltage Level*
+
+image::https://user-images.githubusercontent.com/66802940/183958087-3b0150a5-efec-4988-b51c-10016a5b09c5.png[grafik,250]
+
+To edit a `VoltageLevel` element, follow these steps:
+
+* Navigate to the *Substation* editor.
+* Select the *VoltageLevel* you wish to edit.
+* Click on the *edit* button.
+* Make the necessary changes and click *Save*.
+
+The `VoltageLevel` element has four attributes:
+
+* `name`: a unique identifier for the voltage level within the parent substation.
+* `desc`: a human-readable description.
+* `nomFreq`: the nominal frequency of the voltage level (e.g. 50Hz/60Hz/16.6Hz).
+* `numPhases`: the number of phases.
+
+The *Voltage* setting is used to edit the `Voltage` element, which is structured as follows:
+
+[,xml]
+----
+<Voltage multiplier="k" unit="V">110</Voltage>
+----
+
+In the wizard, you have the option to set the `multiplier` and the value (110), with the unit fixed to `V`.
+
+*Remove Voltage Level*
+
+To remove an existing `VoltageLevel` element within the parent `Substation`
+
+* Navigate to the *Substation* editor.
+* Select the *Voltage Level* you wish to remove.
+* Click on the *delete* button.

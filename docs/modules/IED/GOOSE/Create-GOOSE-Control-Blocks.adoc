@@ -1,0 +1,63 @@
+*Open create wizard*
+
+To access the GOOSE Control Block, follow these steps:
+
+. Navigate to the *Substation* editor.
+. Click on the *G* icon button in the upper left corner.
+. Click on *GOOSE+*.
+. Select the `IED` where you want to store the GOOSE.
+
+Alternatively:
+
+. Navigate to the *Substation* editor.
+. Click on one of the IEDs in the editor.
+. Click on the *G* action icon.
+. Click on *GOOSE+*.
+
+NOTE: The `GSEControl` element, its child elements, and its referenced `DataSet` element are saved to the first `LN0` element in the selected `IED`.
+
+&nbsp;
+
+This create wizard consists of three pages. All pages must be completed correctly to add the GOOSE Control Block and its DataSet to the SCL. You can navigate between the pages using the buttons in the footer.
+
+NOTE: The *Save* button, which adds the GOOSE Control Block to the SCL, is on the last page.
+
+&nbsp;
+
+*GSEControl page*
+
+image::https://user-images.githubusercontent.com/66802940/182394365-fd4198ed-1775-440d-a4e7-a6d0bc8ee4d4.png[grafik,200]
+
+This page contains a set of settings the server needs to have to be able to generate a GOOSE:
+
+* `name`: The main identifier for the GOOSE within the SCL. The name must be unique for all `GSEControl` elements in the same parent element, influencing the GOOSE Control Block reference.
+* `desc`: An optional string describing the `GSEControl` element.
+* `type`: Indicates whether this control block is a `GOOSE` or `GSSE` type. The later one is deprecated!
+* `appID`: A unique identifier for the GOOSE.
+* `fixedOffs`: Allows to specify the type of encoding for the GOOSE. For more information, see IEC 61850-8-1.
+* `securityEnabled`: Specifies the type of security measures the GOOSE has: encryption and/or signature or none of the two.
+
+&nbsp;
+
+image::https://user-images.githubusercontent.com/66802940/182394792-72f37d6d-8e7b-4411-bf88-693ca6a85274.png[grafik,300]
+
+*Communication page*
+
+This page allows defining all communication-related settings for the GOOSE. This information is saved to the `Communication` section.
+
+. `MAC-Address`: The destination MAC address of the GOOSE.
+. `APPID`: The APPID of the GOOSE. This is recommended to be unique thoughout the complete project.
+. `VLAN-ID`: The virtual LAN ID the GOOSE shall be limited to.
+. `VLAN-PRIORITY`: The priority of the GOOSE message. Can be used to prioritize time-critical messages like trip signals over non-time-critical messages.
+. `MinTime`: The minimum time between two occurring GOOSEs when, for example, a trip occurs.
+. `MaxTime`: The maximum time between two occurring GOOSEs in case there is not trip.
+
+*Data picker*
+
+To define the data set, a multi-select data picker is used on the last page of the create wizard. This allows you to select multiple data attributes at the same time. The example below picked the data attributes `general` and its quality information `q` from the data object `Op`, the logical node `IP_ PTOC 1`, and the logical device `ConvSS_DistProt_5051BackUpOC`.
+
+image::https://user-images.githubusercontent.com/66802940/182411370-0be711b6-3daa-43b1-9ec3-4d7f6eb115d0.png[grafik]
+
+NOTE: If no data is picked, the `DataSet` is still created but is empty! You can add data using the edit wizard in a later stage.
+
+&nbsp;

@@ -1,0 +1,99 @@
+The function structure is initially hidden. You can reveal it by toggling the *Filter function type element* button located in the upper corner of the *Substation* editor.
+
+image::https://user-images.githubusercontent.com/66802940/183363763-d9bcd212-4374-4e60-a4d8-9167156a1f8a.png[grafik,300]
+
+The elements `Function`, `SubFunction`, `EqFunction`, and `EqSubFunction` can only be allocated in specific parent elements. OpenSCD provides guidance in this regard. To check for allocation options, click the *Add* button next to the parent element and see if any of the options are available, such as for *Function*.
+
+image::https://user-images.githubusercontent.com/66802940/183364768-869b6654-25a7-47c2-ad0f-a5382e953b55.png[grafik,350]
+
+or so for *EqFunction*
+
+image::https://user-images.githubusercontent.com/66802940/183364886-28fca8b8-c5af-44ed-a352-a211f5f05761.png[grafik,350]
+
+&nbsp;
+
+*Function type element wizards*
+image:https://user-images.githubusercontent.com/66802940/183365686-f4f78d0d-4c32-4aaa-be00-ad53e19ec8df.png[grafik,250]
+
+All wizards for the elements `Function`, `SubFunction`, `EqFunction`, and `EqSubFunction` share the same attributes and restrictions. For instance, the *Add Function* wizard serves as a representative for the others. The wizard dialog enables you to add the following three attributes:
+
+* `name`: The name of the function.
+* `desc`: A human-readable description of the function.
+* `type`: A user-definable function type.
+
+&nbsp;
+
+*Create Function:*
+
+To create a new `Function` element, follow these steps:
+
+. Select the appropriate parent element, such as `Bay`.
+. Click on the *Add More* button.
+. Choose *Function* from the options.
+. Provide at least a *name* for the function, then click *Save*.
+
+*Edit Function:*
+
+To edit a `Function` element:
+
+. Select the desired `Function` element within the *Substation* editor.
+. Click on the *Edit* button.
+. Make the necessary changes, then click *Save*.
+
+&nbsp;
+
+*Create SubFunction:*
+
+To create a new `SubFunction` element:
+
+. Select the appropriate parent, either a `Function` or another `SubFunction`.
+. Click on the *Add more* button.
+. Choose *SubFunction* from the options.
+. Provide at least a *name*, then click *Save*.
+
+*Edit SubFunction:*
+
+To edit a `SubFunction` element:
+
+. Select the desired *SubFunction* within the *Substation* editor.
+. Click on the *Edit* button.
+. Make the necessary changes, then click *Save*.
+
+&nbsp;
+
+*Create EqFunction:*
+
+To create a new `EqFunction` element:
+
+. Select the appropriate parent, such as `ConductingEquipment`.
+. Click on the *Add More* button.
+. Choose *EqFunction* from the options.
+. Provide at least a name, then click *Save*.
+
+*Edit EqFunction:*
+
+To edit an existing `EqFunction` element:
+
+. Select the desired *EqFunction* element within the *Substation* editor.
+. Click on the *Edit* button.
+. Make the necessary changes and click *Save* to confirm the modifications.
+
+&nbsp;
+
+*Create EqSubFunction:*
+
+To create a new `EqSubFunction` element:
+
+. Select the appropriate parent, either `EqFunction` or `EqSubFunction`.
+. Click on the *Add More* button.
+. Choose *EqSubFunction* from the list of options.
+. Provide at least a name for the new element and click *Save* to confirm the creation.
+
+*Edit EqSubFunction:*
+
+To edit an existing `EqSubFunction` element:
+
+. Select the *EqSubFunction* element within the *Substation* editor.
+. Click on the *Edit* button.
+. Make the desired changes.
+. Click *Save* to confirm the modifications.

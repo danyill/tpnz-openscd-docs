@@ -1,0 +1,126 @@
+As an IEC 61850 user, during the specification phase, I can articulate various requirements for the SCL files. Some common specifications include:
+
+* Defining the substation structure, including its hierarchy and organization.
+* Creating a single-line diagram to represent the electrical layout and connections within the substation.
+* Specifying data structure requirements by defining DataTypeTemplates for various data types used in the substation.
+* Allocating logical node classes to specific substation elements, such as assigning overcurrent protection (`PTOC`) to bay 1.
+
+All of these requirements can be fulfilled using the `Substation` section and the `DataTypeTemplate` section. However, some users may require further specificity in their specifications, such as:
+
+* Allocating logical nodes to IEDs, specifying the assignment of devices like distance protection 'PDIS' to main 1 and overcurrent protection 'PTOC' to main 2.
+* Defining the capabilities of the IED, including details like the number of GOOSE messages it needs to subscribe to or the maximum number of simultaneously activated reports it can handle.
+
+These detailed specifications can only be implemented within the `IED` element in the SCL. Building such a so-called `SPECIFICATION` IED can be achieved either manually or through a transformation algorithm based on the functional structure defined in the substation section.
+
+*Automated SPECIFICATION IED creation*
+
+image::https://user-images.githubusercontent.com/66802940/183670442-f61a3135-77e2-423a-9754-650907d6c9e2.png[grafik,250]
+
+The algorithm is based on structuring logical nodes in the substation section using function-type elements, while logical devices serve a similar purpose in the IED section. Due to their different structures, specific transformation rules are needed:
+
+. Logical devices can have only one parent, while the `Server` function can have multiple parents. This may result in multiple functions with the same name in the substation structure (e.g., Circuit_Breaker, potentially existing once in every bay). To address this, the logical name can be constructed from the parent names in addition to the function name. The algorithm considers as many parents as necessary to ensure a globally unique logical device name.
+. If a function or sub-function has only one logical node, a new logical device is not created. Instead, the function/sub-function name is written to the logical node's `prefix` attribute.
+. At least one logical node of the `lnClass = LLN0` must exist in the logical device. A transformation without such a logical node in the `DataTypeTemplates` is not possible. If multiple `LLN0` nodes are defined, one must be selected.
+
+!!! The input for the automated IED creation is the function structure in the substation. Therefore, it's essential to ensure that the SCL file contains:
+
+* https://github.com/openscd/open-scd/wiki/Function[existing function(s) in the Substation section]
+
+To utilize the automated specification IED creation:
+
+. Ensure that the menu plugin *Create Virtual IED* is activated. (See TODO)
+. Open the *Menu* and click on *Create Virtual IED*.
+. Fill in the following details:
+ ** `manufacturer`: This is not the actual manufacturer but a tag for the entity conducting the specification.
+ ** `desc`: Allows differentiation of multiple `SPECIFICATION` IEDs in the file.
+ ** `AccessPoint name`: Must be specified for schema validity and is replaced with the real access point name at a later stage.
+ ** Select at least one logical node.
+. Don't forget to press *Save*.
+
+NOTE: The name of the logical device is displayed above the LLN0 selection field. It represents a globally unique logical device name based on the function structure in the substation section.
+
+Below is an example project showcasing a typical function structure specification. You can load this into OpenSCD and observe the outcome of the transformation yourself. Happy testing! :)
+
+[,xml]
+----
+<Substation xmlns="http://www.iec.ch/61850/2003/SCL" name="AA1">
+	<VoltageLevel name="E1" desc="" nomFreq="50" numPhases="3">
+		<Voltage unit="V" multiplier="k">110</Voltage>
+			<Bay name="Q01" desc="">
+				<ConductingEquipment name="QC9" type="DIS" desc="">
+					<Terminal name="T1" cNodeName="grounded" substationName="AA1" voltageLevelName="E1" bayName="Q01" connectivityNode="AA1/E1/Q01/grounded"/>
+					<EqFunction name="Earth_Switch">
+						<LNode iedName="None" lnClass="CSWI" lnInst="1" lnType="OpenSCD_CSWI"/>
+						<LNode iedName="None" lnClass="CILO" lnInst="1" lnType="OpenSCD_CILO"/>
+						<LNode iedName="None" lnClass="XSWI" lnInst="1" lnType="OpenSCD_XSWI_EarthSwitch"/>
+					</EqFunction>
+				</ConductingEquipment>
+				<ConductingEquipment name="QB1" type="DIS" desc="">
+					<EqFunction name="Disconnector">
+						<LNode iedName="None" lnClass="CSWI" lnInst="1" lnType="OpenSCD_CSWI"/>
+						<LNode iedName="None" lnClass="XSWI" lnInst="1" lnType="OpenSCD_XSWI_DIS"/>
+						<LNode iedName="None" lnClass="CILO" lnInst="1" lnType="OpenSCD_CILO"/>
+					</EqFunction>
+				</ConductingEquipment>
+				<ConductingEquipment name="QA1" type="CBR" desc="">
+					<EqFunction name="Circuit_Breaker">
+						<LNode iedName="None" lnClass="CSWI" lnInst="1" lnType="OpenSCD_CSWI"/>
+						<LNode iedName="None" lnClass="CILO" lnInst="1" lnType="OpenSCD_CILO"/>
+						<LNode iedName="None" lnClass="XCBR" lnInst="1" lnType="OpenSCD_XCBR"/>
+					</EqFunction>
+				</ConductingEquipment>
+				<ConnectivityNode name="grounded" pathName="AA1/E1/Q01/grounded"/>
+				<Function name="Timed_Overcurrent">
+					<LNode iedName="None" lnClass="LLN0" lnInst="" lnType="OpenSCD_LLN01" prefix=""/>
+					<LNode iedName="None" lnClass="PTOC" lnInst="2" lnType="OpenSCD_PTOC" prefix="ID_"/>
+					<LNode iedName="None" lnClass="PTOC" lnInst="1" lnType="OpenSCD_PTOC" prefix="IDD_"/>
+				</Function>
+				<Function name="Distance_Protection">
+					<SubFunction name="Zone4">
+						<LNode iedName="None" lnClass="PDIS" lnInst="1" lnType="OpenSCD_PDIS"/>
+					</SubFunction>
+					<SubFunction name="Zon3">
+						<LNode iedName="None" lnClass="PDIS" lnInst="1" lnType="OpenSCD_PDIS"/>
+					</SubFunction>
+					<SubFunction name="Zone2">
+						<LNode iedName="None" lnClass="PDIS" lnInst="1" lnType="OpenSCD_PDIS"/>
+					</SubFunction>
+					<SubFunction name="Zone1">
+						<LNode iedName="None" lnClass="PDIS" lnInst="1" lnType="OpenSCD_PDIS"/>
+					</SubFunction>
+				</Function>
+			</Bay>
+			<Bay name="Q02" desc="">
+				<ConductingEquipment name="QC9" type="DIS" desc="">
+					<Terminal name="T1" cNodeName="grounded" substationName="AA1" voltageLevelName="E1" bayName="Q01" connectivityNode="AA1/E1/Q01/grounded"/>
+					<EqFunction name="Earth_Switch">
+					</EqFunction>
+				</ConductingEquipment>
+				<ConductingEquipment name="QB1" type="DIS" desc="">
+					<EqFunction name="Disconnector">
+						<LNode iedName="None" lnClass="CSWI" lnInst="1" lnType="OpenSCD_CSWI"/>
+						<LNode iedName="None" lnClass="XSWI" lnInst="1" lnType="OpenSCD_XSWI_DIS"/>
+						<LNode iedName="None" lnClass="CILO" lnInst="1" lnType="OpenSCD_CILO"/>
+					</EqFunction>
+				</ConductingEquipment>
+				<ConductingEquipment name="QA1" type="CBR" desc="">
+					<EqFunction name="Circuit_Breaker">
+					</EqFunction>
+				</ConductingEquipment>
+			</Bay>
+		</VoltageLevel>
+		<VoltageLevel name="J1" desc="" nomFreq="50" numPhases="3">
+			<Voltage unit="V" multiplier="k">20</Voltage>
+			<Bay name="Q01" desc="">
+				<ConductingEquipment name="QC9" type="DIS" desc="">
+					<Terminal name="T1" cNodeName="grounded" substationName="AA1" voltageLevelName="E1" bayName="Q01" connectivityNode="AA1/E1/Q01/grounded"/>
+					<EqFunction name="Earth_Switch">
+					<LNode iedName="None" lnClass="CSWI" lnInst="1" lnType="OpenSCD_CSWI"/>
+						<LNode iedName="None" lnClass="CILO" lnInst="1" lnType="OpenSCD_CILO"/>
+						<LNode iedName="None" lnClass="XSWI" lnInst="1" lnType="OpenSCD_XSWI_EarthSwitch"/>
+					</EqFunction>
+				</ConductingEquipment>
+			</Bay>
+		</VoltageLevel>
+	</Substation>
+----

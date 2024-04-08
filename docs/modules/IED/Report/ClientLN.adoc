@@ -1,0 +1,24 @@
+A `ClientLN` is one of the three elements that describe connections between IEDs in a SCL file.
+
+*HowTo connect Report with ClientLNs*
+
+OpenSCD allows you to connect `ReportControl` via `ClientLN`. The starting point is the *IED* in the *Substation* editor.
+
+image::https://user-images.githubusercontent.com/66802940/133250977-03eb956f-fde7-43bc-994c-790b7ec33a2a.png[alt text,250]
+
+* Click on an *IED*.
+* Click on the *Add connection* button.
+* The `ClientLN` wizard opens.
+* On the left-hand side, you can select the `ReportControl` element(s) in the project.
+* On the right-hand side, you can see all logical nodes in the receiving IED (client).
+* All so-called client logical nodes - logical nodes allocated to `AccessPoint` are sorted to be on top.
+* `LN0` elements are sorted to be at the bottom.
+* Click on `CONNECT`.
+
+image::https://user-images.githubusercontent.com/66802940/133251594-7d552b24-e64f-4875-932a-07c990c0c7ac.png[grafik]
+
+NOTE: If `ClientLN` connections are already present in the `Report Control` block, the wizard does not close on *CONNECT*
+
+NOTE: If the `RptEnabled` `max` attribute is smaller or equal to the `ClientLN`, a connection is not possible. The `ReportControl` on the right-hand side is disabled.
+
+TIP: You can filter for several terms at the same time. The space between terms acts as a logical AND.

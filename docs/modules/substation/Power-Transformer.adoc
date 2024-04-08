@@ -1,0 +1,42 @@
+*Create PowerTransformer*
+
+image::https://user-images.githubusercontent.com/66802940/183964721-b068bd17-b398-4277-93d6-387f937d7a07.png[grafik,250]
+
+To create a new `PowerTransformer` element within the parent `Bay`, `VoltageLevel`, or `Substation`:
+
+* Navigate to the *Substation* editor.
+* Select the parent element where you want to add the power transformer.
+* Fill in all the required values in the wizard.
+* Click on the *Add* button.
+
+The create wizard allows you to set the following attributes:
+
+* `type`: This is fixed to `PTR`.
+* `name`: This is the unique identifier of the power transformer in the parent element.
+* `desc`: This is a human-readable description of the power transformer.
+
+*Edit PowerTransformer*
+
+image::https://user-images.githubusercontent.com/66802940/183964990-25ef4d51-6465-42f0-b77b-3bf3428d625e.png[grafik,250]
+
+To edit a `PowerTransformer` element:
+
+* Navigate to the *Substation* editor.
+* Select the *PowerTransformer* you want to edit.
+* Click on the *edit* button.
+* Make the necessary changes.
+* Click *Save* to confirm the changes.
+
+The `PowerTransformer` element has the following attributes:
+
+* `name`: This is the unique identifier of the power transformer in the parent.
+* `desc`: This is a human-readable description of the power transformer.
+* `type`: This attribute is fixed to `PTR`.
+
+*Remove PowerTransformer*
+
+To remove an existing `PowerTransformer` element within the parent `Bay`:
+
+* Navigate to the *Substation* editor.
+* Select the *PowerTransformer* you wish to remove.
+* Click on the *delete* button.

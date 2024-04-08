@@ -1,0 +1,24 @@
+The templates validator serves a distinct purpose from the schema validator by identifying issues that are not related to the schema defined in IEC 61850-6, but rather with other sections of the standard such as IEC 61850-7-3, IEC 61850-7-4, and IEC 61850-8-1.
+
+NOTE: It's important to note that OpenSCD utilizes namespace description (NSD) files as a reference for validation purposes, as per the standard's guidelines. However, these files are not available for all editions of the standard. Consequently, the validation of the `DataTypeTemplate` section is only performed for projects from 2007B3 and higher (Edition 2.1).
+
+The validator is activated with each modification to the project basis, and the outcomes are exhibited in the *diagnostics* pane as follows:
+
+image::https://user-images.githubusercontent.com/66802940/133213707-80789ca7-b23f-467e-9142-711e54ffe70c.png[grafik]
+
+The implemented rules currently address the following issues:
+
+* Mandatory `DO` is missing in `LNodeType`
+* Mandatory `DA` is missing in the `DOType`
+* Mandatory `SDO` is missing in the `DOType`
+* Mandatory `BDA` is missing in the `DAType`
+* Missing `DA` needed for control operation depending in ctlModel
+ ** `sbo-with-enhanced-security`: Missing `Oper`, `SBOw`
+ ** `sbo-with-normal-security`: Missing `Oper`, `SBO`
+ ** `direct-with-enhanced-security`: Missing `Oper`
+ ** `direct-with-normal-security`: Missing `Oper`
+* Check for correct service data implementation `Oper`,
+* Broken reference of `DO` to `DOType` - missing type or invalid type
+* Broken reference of `SDO` to `DOType` - missing type or invalid type
+* Broken reference of `DA` to `DAType` - missing type or invalid type
+* Broken reference of `BDA` to `DAType` - missing type or invalid type

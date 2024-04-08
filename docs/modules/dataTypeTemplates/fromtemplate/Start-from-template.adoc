@@ -1,0 +1,20 @@
+The template database offers a growing number of pre-defined `LNodeType`, `DOType`, `DAType` and `EnumType`. `EnumType`. You can add any of them from the templates database to your project and reuse them as needed.
+
+When you examin the template database and compare the numbers of the different types, you will notice that they grow from `EnumType`, `DAType`, `DOType` to `LNodeType`. This growth is driven by the increasing number of possibilities with each component.
+
+``EnumType``s, for example, are relatively straightforward. The Parts 7-3 and 7-4 defines many of those, and in most cases, you simply use them. You might need to reduce the number of values within your `EnumType`, but you will rarely define your own during this step.
+
+For the `DAType`, things become a bit more complex. Here, child elements might be present or absent, or one of them must be present. Take, for example, the `AnalogueValue`. This could potentially have two children: a float and/or an integer attribute. This means that there are potentially three different types of `AnalogueValue`. This complexity increases with elements like a `Vector`, which consists of one or two `AnalogueValue`, `mag` and/or `ang`, resulting in nine different possibilities.
+
+The complexity escalates further when dealing with `DOType` and `LNodeType`. Here, the theoretical possibilities and complexity also grow. What does this mean for OpenSCD? We cannot provide every possible combination for every data defined within the namespace of IEC 61850. This would result in an excessively large XML file that would be difficult to navigate. Instead, we offer the most common and most general types used by most users.
+
+You can add all types from the template database:
+
+* https://github.com/openscd/open-scd/wiki/Add-LNodeType-from-templates[LNodeType]
+* https://github.com/openscd/open-scd/wiki/Add-DOType-from-templates[DOType]
+* https://github.com/openscd/open-scd/wiki/Add-DAType-from-templates[DAType]
+* https://github.com/openscd/open-scd/wiki/Add-EnumType-from-templates[EnumType]
+
+However, we suggest starting with the `LNodeType`. This automatically adds a valid element to your project, reduces the chance of errors, and provides the minimum required element in your `DataTypeTemplates` section.
+
+Please note that in some cases, you may need to adapt the element imported from the template database. You can see link:[here] for instructions on how to do that.

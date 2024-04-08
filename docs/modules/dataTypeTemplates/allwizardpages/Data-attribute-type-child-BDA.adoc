@@ -1,0 +1,61 @@
+*Add new BDA*
+
+image::https://user-images.githubusercontent.com/66802940/132066144-6efe36e8-544e-487d-9bdf-70829ab878fd.png[alt text,250]
+
+To add new ``BDA``s to an existing `DAType` using OpenSCD, follow these steps:
+
+. Navigate to the `DAType` you wish to edit and open the *Edit DAType* wizard.
+. Click on the *DATA ATTRIBUTE* button located in the middle of the wizard.
+
+_Settings_:
+
+. *name**: If you intend to include a `BDA` from the IEC 61850 namespace, refer to the guidelines provided in the IEC 61850-7-4 standard. Alternatively, if you are creating a custom `BDA`, ensure that its name begins with a lowercase letter (a-z).
+. *desc*: Provide a user-defined description for the attribute.
+. *bType*_: Select the basic type of the attribute. If *Enum_ or _Struct_ is chosen, the *type* field must not be left empty.
+. *type*_: Type is defined as a string in the SCL but is a selector in OpenSCD. If the *bType* is set to *Struct_, the selector displays all `DAType` - ``id``'s in the project. Note that without existing `DAType` in the project, you cannot create a `BDA` with a Struct type. Conversely, if the *bType* is *Enum*, the selector displays all `EnumType` - ``id``'s in the project.
+. *sAddr*: This is a user-defined string used to describe a short address for the attribute.
+. *valKind*: This field may be optional. If present, it must be set to either true or false.
+. *valImport*: Specify whether the value should be imported.
+. *Val*: This field allows you to pre-define the value offline for the attribute. It can be added to any data attribute (`DA` or `BDA`).
+
+____
+*NOTE:* The `Val` definition may not be relevant for all function constraints (`FC`). For example, defining a value for a status-type data attribute like `stVal` may not be very useful. However, for other data attributes, such as `ctlModel`, pre-defining the value can be quite meaningful.
+____
+
+____
+*CHECKS:* The schema validator covers missing or incorrect `name` attributes, while the template validator addresses missing or incorrect `type` attributes.
+____
+
+image::https://user-images.githubusercontent.com/66802940/132106055-277fff5a-9b59-4454-be8d-fd4d4049d056.png[alt text,250]
+
+*Edit BDA*
+
+You can use OpenSCD to modify existing `BDA` elements. Here's how:
+
+. Navigate to the list of `DAType` in the *Template editor*.
+. Click on the `DAType` that contains the `BDA` you want to edit.
+. Click on the child `BDA` you wish to modify.
+
+_Settings_:
+
+The settings are the same as those in the *Add BDA* wizard, with the addition of a remove button for deletion.
+
+_Example:_
+
+----
+<BDA name="orCat" bType="Enum" type="OpenSCD_OriginatorCategoryKind">
+----
+
+&nbsp;
+
+*Remove BDA*
+
+To delete a `BDA` from a `DAType`, follow these steps:
+
+. Open the *Edit DAType* wizard.
+. Click on the `BDA` you want to remove.
+. Click on the *Remove* button.
+
+____
+*WARNING*: Be cautious when removing ``BDA``s as OpenSCD does not perform validity checks before deletion.
+____

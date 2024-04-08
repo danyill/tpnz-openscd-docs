@@ -1,0 +1,11 @@
+As an example, this page shows how to import a `DOType` from the templates database:
+
+. Open the *Template editor*.
+. Click the *Add DOType* button.
+. Select _DPC_ from the *values*.
+. Don't forget the *id* field.
+. Click on *Save*.
+
+OpenSCD automatically imports all elements required for a valid definition of a `DOType`. When you perform this action with an empty project, your result should resemble the following:
+
+image::https://user-images.githubusercontent.com/66802940/133636784-d1dbe4e6-7402-479e-8357-9d806d49a785.png[grafik]

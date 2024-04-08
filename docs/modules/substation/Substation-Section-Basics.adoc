@@ -1,0 +1,19 @@
+The substation section encompasses two variants of elements. The first variant, which we will denote as process-type elements or process structure, enables the creation of the physically visible structure within the substation. This process structure is comprised of the following elements:
+
+* https://github.com/openscd/open-scd/wiki/Substation[Substation]
+* https://github.com/openscd/open-scd/wiki/Voltage-Level[Voltage Level]
+* https://github.com/openscd/open-scd/wiki/Bay[Bay]
+* https://github.com/openscd/open-scd/wiki/Conducting-Equipment[Conducting Equipment]
+* `General Equipment` (not yet implemented)
+* https://github.com/openscd/open-scd/wiki/Power-Transformer[Conducting Equipment]
+* `Transformer Winding` (not yet implemented)
+* `Neutral Winding` (not yet implemented)
+* `Line` (not yet implemented)
+* `Process` (not yet implemented)
+
+The other type of elements is referred to as function-type elements or functional structure, and it includes the following elements:
+
+* https://github.com/openscd/open-scd/wiki/Function[Function]
+* https://github.com/openscd/open-scd/wiki/Function[SubFunction]
+* https://github.com/openscd/open-scd/wiki/Function[EqFunction]
+* https://github.com/openscd/open-scd/wiki/Function[EqSubFunction]

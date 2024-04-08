@@ -1,0 +1,61 @@
+The configuration of GOOSEs, or more precisely, GOOSE Blocks, is done on the SCL element `GSEControl`, its referenced `DataSet` element, and its referenced `GSE` element allocated in the `Communication` section. The schema restricts the allocation of the element:
+
+. `GSEControl` must reside in the `LN0` element.
+. `GSEControl` and its referenced `DataSet` must have the same parent.
+
+*Editing GOOSEs*
+
+In OpenSCD, `GSEControl` elements are configured using so-called wizards. There are three wizards combined that allow editing of GOOSE.
+
+image::https://user-images.githubusercontent.com/66802940/182388141-9818dc40-9d27-4fd1-bc24-a9f78b0f1304.png[grafik,250]
+
+&nbsp;
+
+The wizard contains a set of setting allocated in the `GSEControl` element:
+
+* `name`: The main identifier for the GOOSE within the SCL. It must be unique for all `GSEControl` elements in the same parent element and influences the GOOSE Control Block reference.
+* `desc`: An optional string describing the `GSEControl` element.
+* `type`: Indicates whether this control block is a `GOOSE` or `GSSE` type. The later one is deprecated!
+* `appID`: A unique identifier for the GOOSE.
+* `fixedOffs`: Allows specifying the type of encoding for the GOOSE. Refer to IEC 61850-8-1 for more information.
+* `securityEnabled`: Specifies the type of security measures the GOOSE has: encryption and/or signature, or none of the two.
+
+To modify any of these attributes, click on the *Save* button within the wizard.
+
+&nbsp;
+
+*Communication page*
+
+image::https://user-images.githubusercontent.com/66802940/182598880-546ded95-63a4-429c-9ae1-24600e4e8500.png[grafik,250]
+
+This page allows you to do define all communication-related setting for the GOOSE. This information is then saved to the `Communication` section.
+
+. `MAC-Address`: Specifies the destination MAC address of the GOOSE.
+. `APPID`: The APPID of the GOOSE. This is recommended to be unique throughout the entire project.
+. `VLAN-ID`: Determines the virtual LAN ID to wich the GOOSE shall be limited.
+. `VLAN-PRIORITY`: The priority of the GOOSE message. Can be used to priories time-critical messages like trip signals over non-time-critical messages.
+. `MinTime`: The minimum time between two occurring GOOSEs when, for example, a trip occurs.
+. `MaxTime`: The maximum time between two occurring GOOSEs in case there is not trip.
+
+&nbsp;
+
+*Editing data set (DataSet)*
+
+____
+See data set wizard
+____
+
+&nbsp;
+
+*Navigating between wizard*
+
+image::https://user-images.githubusercontent.com/66802940/182599062-dd5b6cbe-f530-4086-b364-a720968a85cf.png[,150]
+
+Each wizard represents one element in the SCL. To navigate between them, click on the *more vert* icon button on the upper-left corner. The pop-up menu will display various choices.
+
+. Remove the `GSEControl` element
++
+NOTE: If the referenced `DataSet` element is exclusively linked to this GOOSE, it will also be removed.
+
+. Open the data set wizard for the `DataSet` referenced by this GOOSE.
+. Open the communication wizard.

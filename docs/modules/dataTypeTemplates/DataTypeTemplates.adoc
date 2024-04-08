@@ -1,0 +1,28 @@
+All top-down projects start here. The *Template editor* of OpenSCD allows you to define your data model using a greenfield approach. If you are looking at this section of the wiki, your task likely involves defining a data model. For most users, this entails transitioning an existing signal list to IEC 61850 data model references.
+
+The difference between a signal list and the data model defined in the IEC 61850 lies in the hierarchical structure:
+
+. Logical node
+. Data object
+. Data attribute
+. (Enumeration)
+
+This hierarchical structure is defined in the `DataTypeTemplates` section of an SCL file, where you define and reference four elements: `LNodeType`, `DOType`, `DAType` and `EnumType`. Each element builds upon the other. Essentially, to define a `LNodeType`, or, for example, an LLN0 logical node class, you must already have some defined ``DOType``s, which in turn require defined ``DAType``s, and for some of those (ENx), you also need some ``EnumType``s.
+
+This complexity can be challenging for beginners to grasp. To assist users, especially those unfamiliar with this aspect of the standard, such as 7-4, 7-3, 8-1, OpenSCD offers templates, which serve as a pre-defined data model. These templates include a wide range of logical node classes with proper references to `DOType`, `DAType` and `EnumType`.
+
+You can check if OpenSCD has a template for a required logical node class in the *Add LNodeType* wizard (under Pre-defined lnClasses from templates). For more details, please refer to https://github.com/openscd/open-scd/wiki/Start-from-template[start from templates].
+
+If this option is disabled, you will need to start the precess https://github.com/openscd/open-scd/wiki/Start-from-scratch[from scratch]
+
+Additionally, you can read/manipulate any element and their attributes using the wizards provided.
+
+* https://github.com/openscd/open-scd/wiki/Logical-node-type-LNodeType[LNodeType]
+* https://github.com/openscd/open-scd/wiki/Logical-node-type-child-DO[DO]
+* https://github.com/openscd/open-scd/wiki/Data-object-type-DOType[DOType]
+* https://github.com/openscd/open-scd/wiki/Data-object-type-child-SDO[SDO]
+* https://github.com/openscd/open-scd/wiki/Data-object-type-child-DA[DA]
+* https://github.com/openscd/open-scd/wiki/Data-attribute-type-DAType[DAType]
+* https://github.com/openscd/open-scd/wiki/Data-attribute-type-child-BDA[BDA]
+* https://github.com/openscd/open-scd/wiki/Enumeration-EnumType[EnumType]
+* https://github.com/openscd/open-scd/wiki/Enumeration-EnumVal[EnumVal]

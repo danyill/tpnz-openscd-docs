@@ -1,0 +1,24 @@
+The `Substation` element is considered optional and is often absent in what are referred to as "bottom-up" projects. However, in `OpenSCD`, you have the ability to add the `Substation` element retrospectively.
+
+To facilitate this process, OpenSCD introduces the `guess` function, which aims to expedite the task or provide beginners with guidance on what to do next.
+
+NOTE: The accuracy of the guess function is not guaranteed, as it relies on assumptions (see below) that may not always align with the IEDs present in the `SCL` file. Nevertheless, feel free to try it out, as you can always `undo` changes if needed.
+
+Here's how you can utilize the function:
+
+* Open an `SCL` file with a missing `Substation` or delete all existing `Substation` elements.
+* Click on the fab button *+Add Substation*.
+* In the dialog *Add Substation*, check the box *Guess content*.
+* Choose the `(ctlModel)` (*Control model*) that identifies your switchgear in the IED.
+* Start the *GUESS CONTENT* process.
+
+NOTE: The primary challenge with the guess function lies in accurately identifying the quantity of voltage levels (`VoltageLevel`), bays (`Bay`), and conducting equipment or primary equipment (`ConductingEquipment`).
+
+Therefore, we need to rely on some basic assumptions, which are as follows:
+
+* We assume the presence of only one voltage level.
+* Bays are identified using the logical node `CSWI`. This means that if there is at least one logical node `CSWI` present, and its mandatory data object `Pos` matches the chosen control model (`ctlModel`), a bay is created for that particular IED.
+* Each logical node `CSWI` with a matching `ctlModel` represents a conducting equipment. If a `XCBR` is connected to it (with the same `prefix` and `inst` in the same `LDevice`), the conducting equipment `type` is classified as `CBR`; otherwise, it is classified as `DIS`.
+* Logical node connections (`LNode`) are automatically assigned to the conducting equipment. Ideally, this includes the `CSWI`, a `XCBR` or `XSWI`, and `CILO`.
+
+TIP: The assumption that there is only one voltage level may not hold true for large files with numerous IEDs. In such cases, utilize the *Move* function to allocate bays to other voltage levels as needed.

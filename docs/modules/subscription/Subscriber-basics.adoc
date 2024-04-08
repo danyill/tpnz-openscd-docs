@@ -1,0 +1,167 @@
+The system configuration process includes a critical step known as `subscribing`, which facilitates the connection of data from a sending IED to inputs of a receiving IED. This process is essential for the proper functioning of the tool. The sending data can be stored in a control block such as `ReportControl`, `GSEControl`, or `SampledValueControl`, or it can be referenced within the data model of the sending IED for polling purposes. The receiving IED's input is represented by the SCL element `ExtRef`. Subscribing essentially involves updating or creating an `ExtRef` element in the receiving IED. The connection between the sending data and receiving input is established through several attributes within the `ExtRef` element, including:
+
+* `iedName`: Name of the sending IED.
+* `ldName`: Name of the logical device where the sending data resides.
+* `prefix`: Prefix of the logical node where the sending data is located.
+* `lnClass`: Class of the logical node where the sending data resides.
+* `lnInst`: Instance of the logical node where the sending data resides.
+* `doName`: Path through the structure of data objects names where the data resides (e.g. `Pos` or `A.phsA` for a structured data object).
+* `daName`: Path through the structure of the data attribute names where the data resides (e.g. `stVal` for simple types or `cVal.mag.f` for complex types).
+
+For connections involving sending data with `Report`, `GOOSE` or `SMV` (Sampled Values), and for projects Ed2 and higher, additional attributes may be necessary:
+
+* `srcLDInst`: Instance of the logical device where the sending control block resides.
+* `srcPrefix`: Prefix of the logical node where the sending control block resides.
+* `srcLNClass`: Class of the logical node where the sending control block resides.
+* `srcLNInst`: Instance of the logical node where the sending control block resides.
+* `srcCBName`: Name of the sending control block carrying the information.
+* `serviceType`: Type of service sending the data `GOOSE`, `Report` or `SMV`.
+
+NOTE: Reports are rarely connected to receiving IEDs using the subscription process. OpenSCD currently supports subscribing to `GOOSE` and `SMV` only.
+
+OpenSCD offers three basic subscription plugins for `GOOSE` and three for `SMV`, each differing in how ``ExtRef``s are created or updated.
+
+*Connecting Complete GOOSE/SMV*
+
+NOTE: See https://github.com/openscd/open-scd/wiki/Subscribe-complete-GOOSE[subscribe to GOOSE] or https://github.com/openscd/open-scd/wiki/Subscribe-complete-SMV[subscribe to sampled value stream] to see how to do this with OpenSCD
+
+In this scenario, OpenSCD generates one `ExtRef` in the receiving IED for every data point transmitted via `GOOSE`/`SMV`. This allocation occurs within the first logical device of the logical node `LN0`. Let's delve into an example concerning `GOOSE` below. Here, two `ExtRef` instances are created, each corresponding to one of the `FCDA` elements within the `DataSet` linked to either the GOOSE control block or `GSEControl`. These `FCDA` elements share common attributes that define the reference to the data point in the data model: `ldInst`, `prefix`, `lnClass`, `lnInst`, `doName`, and `daName`. Furthermore, the name of the sending IED is included in the `ExtRef`. The remaining attributes serve to identify the control block to which the `FCDA` elements are connected or carried by.
+
+NOTE: The decision to connect both `FCDA` elements is optional and not mandatory. Also, the allocation of `ExtRef` to the first logical node `LN0` in the receiving IED distinguishes this connection method from others discussed below.
+
+[,xml]
+----
+<IED name="sendingIED" ...>
+    <AccessPoint ...>
+        <Server>
+            <LDevice inst="sendingLD">
+                <LN0 prefix="" lnClass="LLN0" lnInst="">
+                    <DataSet name="someDS">
+                        <FCDA ldInst="CircuitBreaker" prefix="CB" lnClass="XCBR" lnInst="1" doName="Pos" daName="stVal" fc="ST"/>
+                        <FCDA ldInst="Meas" prefix="Meas" lnClass="MMXU" lnInst="1" doName="A.phsA" daName="cVal.mag.f" fc="ST"/>
+                    </DataSet>
+                    <GSEControl name="gooseCB" datSet="someDS">
+                        ...
+                    <GSEControl>
+                </LN0>
+                ...
+            </LDevice>
+        </Server>
+    </AccessPoint>
+</IED>
+...
+<IED name="receivingIED" ...>
+    <AccessPoint ...>
+        <Server>
+            <LDevice inst="receivingLD">
+                <LN0 prefix="" lnClass="LLN0" lnInst="">
+                    ...
+                    <Inputs name="someDS">
+                        <ExtRef iedName="sendingIED" ldInst="CircuitBreaker" prefix="CB" lnClass="XCBR" lnInst="1" doName="Pos" daName="stVal" serviceType="GOOSE" srcLDInst="sendingLD" srcPrefix="" srcLNClass="LLN0" srcLNInst="" srcCBName="gooseCB"/>
+                        <ExtRef iedName="sendingIED" ldInst="Meas" prefix="Meas" lnClass="MMXU" lnInst="1" doName="A.phsA" daName="cVal.mag.f" serviceType="GOOSE" srcLDInst="sendingLD" srcPrefix="" srcLNClass="LLN0" srcLNInst="" srcCBName="gooseCB" />
+                    </Inputs>
+                </LN0>
+                ...
+            </LDevice>
+        </Server>
+    </AccessPoint>
+</IED>
+----
+
+*Connecting Single Data from GOOSE/SMV*
+
+NOTE: This feature is not yet implemented in OpenSCD.
+
+In this scenario, OpenSCD creates one `ExtRef` in the receiving IED for the _selected_ data point within a `GOOSE`/`SMV` control block. The user has the flexibility to choose the location of the `ExtRef`, allowing placement within any logical node in the server. Further details are illustrated in the example below, focusing on `GOOSE`.
+
+There is only one `ExtRef` representing the connection to the selected `FCDA` element within the `DataSet` associated with the GOOSE control block or `GSEControl`. `FCDA` elements share common attributes defining the reference to the data point in the data model: `ldInst`, `prefix`, `lnClass`, `lnInst`, `doName`, and `daName`. User-directed allocation to the logical node enhances project organization.
+
+NOTE: This method's uniqueness lies in the connection of a single `FCDA` element and the freedom granted to the user for allocating the `ExtRef` within the receiving IED.
+
+[,xml]
+----
+<IED name="sendingIED" ...>
+    <AccessPoint ...>
+        <Server>
+            <LDevice inst="sendingLD">
+                <LN0 prefix="" lnClass="LLN0" lnInst="">
+                    <DataSet name="someDS">
+                        <FCDA ldInst="CircuitBreaker" prefix="CB" lnClass="XCBR" lnInst="1" doName="Pos" daName="stVal" fc="ST"/>
+                        <FCDA ldInst="Meas" prefix="Meas" lnClass="MMXU" lnInst="1" doName="A.phsA" daName="cVal.mag.f" fc="ST"/>
+                    </DataSet>
+                    <GSEControl name="gooseCB" datSet="someDS">
+                        ...
+                    <GSEControl>
+                </LN0>
+                ...
+            </LDevice>
+        </Server>
+    </AccessPoint>
+</IED>
+...
+<IED name="receivingIED" ...>
+    <AccessPoint ...>
+        <Server>
+            <LDevice inst="receivingLD">
+                ...
+                <LN prefix="someLN" lnClass="CILO" lnInst="1">
+                    ...
+                    <Inputs name="someDS">
+                        <ExtRef iedName="sendingIED" ldInst="CircuitBreaker" prefix="CB" lnClass="XCBR" lnInst="1" doName="Pos" daName="stVal" serviceType="GOOSE" srcLDInst="sendingLD" srcPrefix="" srcLNClass="LLN0" srcLNInst="" srcCBName="gooseCB"/>
+                    </Inputs>
+                </LN>
+                ...
+            </LDevice>
+        </Server>
+    </AccessPoint>
+</IED>
+----
+
+*Connecting on later binding type inputs*
+
+NOTE: This feature is not yet implemented in OpenSCD!
+
+Later binding is a concept that enables the predefinition of `ExtRef` elements in the IED configuration Tool (ICT) before system configuration. You can identify a predefined `ExtRef` by the attribute `intAddr`. This attribute is a string set by the ICT to identify which internal function utilizes a specific input. Consequently, OpenSCD does not create new `ExtRef` elements but updates existing ones.
+
+Below, we provide an example related to `GOOSE`. There is only one `ExtRef` representing the connection to the selected `FCDA` element within the `DataSet` associated with the GOOSE control block or `GSEControl`. These `FCDA` elements share common attributes that define the reference to the data point in the data model: `ldInst`, `prefix`, `lnClass`, `lnInst`, `doName`, `daName`. The `intAddr` attribute is already predefined and must not be altered, nor can OpenSCD delete such an `ExtRef`.
+
+NOTE: The unique aspect of this plugin lies in its ability to connect a single `FCDA` element to an existing `ExtRef` with a set `instAddr`, distinguishing it from the other methods.
+
+[,xml]
+----
+<IED name="sendingIED" ...>
+    <AccessPoint ...>
+        <Server>
+            <LDevice inst="sendingLD">
+                <LN0 prefix="" lnClass="LLN0" lnInst="">
+                    <DataSet name="someDS">
+                        <FCDA ldInst="CircuitBreaker" prefix="CB" lnClass="XCBR" lnInst="1" doName="Pos" daName="stVal" fc="ST"/>
+                        <FCDA ldInst="Meas" prefix="Meas" lnClass="MMXU" lnInst="1" doName="A.phsA" daName="cVal.mag.f" fc="ST"/>
+                    </DataSet>
+                    <GSEControl name="gooseCB" datSet="someDS">
+                        ...
+                    <GSEControl>
+                </LN0>
+                ...
+            </LDevice>
+        </Server>
+    </AccessPoint>
+</IED>
+...
+<IED name="receivingIED" ...>
+    <AccessPoint ...>
+        <Server>
+            <LDevice inst="receivingLD">
+                ...
+                <LN prefix="someLN" lnClass="CILO" lnInst="1">
+                    ...
+                    <Inputs name="someDS">
+                        <ExtRef intAddr="someIntAddr" iedName="sendingIED" ldInst="CircuitBreaker" prefix="CB" lnClass="XCBR" lnInst="1" doName="Pos" daName="stVal" serviceType="GOOSE" srcLDInst="sendingLD" srcPrefix="" srcLNClass="LLN0" srcLNInst="" srcCBName="gooseCB"/>
+                    </Inputs>
+                </LN>
+                ...
+            </LDevice>
+        </Server>
+    </AccessPoint>
+</IED>
+----

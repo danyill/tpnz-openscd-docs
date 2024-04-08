@@ -1,0 +1,24 @@
+site:
+  title: Transpower OpenSCD Docs
+  # the 404 page and sitemap files only get generated when the url property is set
+  # url: https://danyill.github.io/tpnz-openscd-docs/docs-site
+  start_page: overview:ROOT:introduction.adoc
+content:
+  sources:
+    - url: .
+      # https://github.com/danyill/tpnz-openscd-docs
+      start_path: docs
+      branches: HEAD
+      version: true
+asciidoc:
+  attributes:
+    sectnums: ""
+    experimental: ""
+    idprefix: ""
+    idseparator: "-"
+    page-pagination: ""
+ui:
+  bundle:
+    # using default UI until later
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true

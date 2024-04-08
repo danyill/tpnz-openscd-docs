@@ -1,0 +1,48 @@
+|===
+| Icon | Description
+
+| To be added
+| Substation
+
+| image:https://github.com/openscd/open-scd/assets/146732918/0a3f6834-4927-42a0-9084-217db9beabf2[,55]
+| IED
+
+| image:https://github.com/openscd/open-scd/assets/146732918/3e662651-aab1-4650-8182-2a0059eb4b75[,55]
+| Access Point
+
+| image:https://github.com/openscd/open-scd/assets/146732918/f6abc044-43f1-47bc-877f-22add4169db7[,55]
+| Server
+
+| image:https://github.com/openscd/open-scd/assets/146732918/953b5f6d-c987-4ec4-b84d-4779cb3ce82e[,55]
+| Logical Device
+
+| image:https://github.com/openscd/open-scd/assets/146732918/29187bdc-7cb8-44ce-a965-06813c943c90[,55]
+| Logical Node
+
+| image:https://github.com/openscd/open-scd/assets/146732918/1fa64d9f-27ef-4567-a227-5d33c6528a3c[,55]
+| Report Control Blocks
+
+| image:https://github.com/openscd/open-scd/assets/146732918/c13acbad-bd81-4a4b-b171-b2416668ad0f[,55]
+| GOOSE
+
+| image:https://github.com/openscd/open-scd/assets/146732918/63737d23-f1eb-4502-b08a-aa34779f4785[,55]
+| Sampled Values
+
+| image:https://github.com/openscd/open-scd/assets/146732918/a9a13e1e-cc3b-4e07-ba02-cb1c95e5d541[,55]
+| Voltage Transformer
+
+| image:https://github.com/openscd/open-scd/assets/146732918/18d5b545-b676-4e4b-b9d7-c3552099d1dd[,55]
+| Current Transformer
+
+| image:https://github.com/openscd/open-scd/assets/146732918/8945fb68-4702-4fe0-8830-e69fbf2b57c2[,40]
+| Circuit Breaker
+
+| image:https://github.com/openscd/open-scd/assets/146732918/2901dcca-d877-4332-a1bb-b007b25712b9[,40]
+| Disconnector
+
+| image:https://github.com/openscd/open-scd/assets/146732918/8a85a1ac-1a3a-4f90-b90a-1a571a82095b[,40]
+| Earth Switch
+
+| image:https://github.com/openscd/open-scd/assets/146732918/226ca6a2-4f43-4c9f-b05a-144315a8ef72[,40]
+| Edit ConnectedAP
+|===

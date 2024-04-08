@@ -1,0 +1,17 @@
+Here you can learn how to configure ``IED``s with *OpenSCD*.
+
+== Create virtual IED
+
+* https://github.com/openscd/open-scd/wiki/Create-SPECIFICATION-IED-from-functions[Create SPECIFICATION IED]
+
+== Edit/create/delete control blocks
+
+* https://github.com/openscd/open-scd/wiki/Generic-Substation-Event-Basics[GSEControl] (`GOOSE`)
+* https://github.com/openscd/open-scd/wiki/Sampled-Values-Basics[SampledValueControl]
+* https://github.com/openscd/open-scd/wiki/Report-Basics[ReportControl]
+
+== Communication mappings
+
+* https://github.com/openscd/open-scd/wiki/ClientLN[Create report connections] (`ClientLN`)
+* https://github.com/openscd/open-scd/wiki/Subscriber-Basics[Create GOOSE connection]
+* https://github.com/openscd/open-scd/wiki/Subscriber-Basics[Create Sampled Value connections]

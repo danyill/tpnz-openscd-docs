@@ -1,0 +1,6 @@
+Validators play a crucial role in the functionality of this editor, particularly in handling the complexity of SCL files. This is especially valuable for users who are new to working with SCL files or using OpenSCD. While we strive to prevent the creation of invalid files, particularly in expert mode, it's not always feasible.
+
+Currently, there are two validation functions implemented, both of which are triggered when opening or creating a new project, as well as on every editor action. This means that whenever there are changes to the project basis, these validators are activated. The results of these validations are displayed in the *diagnostics* pane (accessible via Ctrl + D) and are grouped according to the validation function.
+
+. https://github.com/openscd/open-scd/wiki/Validate-schema[Schema validator]
+. https://github.com/openscd/open-scd/wiki/Validate-template[Templates validator]

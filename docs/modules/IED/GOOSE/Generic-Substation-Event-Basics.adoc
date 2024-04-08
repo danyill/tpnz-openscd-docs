@@ -1,0 +1,26 @@
+The Generic Substation Event is a service class that has been designed to transmit data for time critical functions such as trip signals to circuit breakers. Its most prominent type is the Generic Object Oriented Substation Event GOOSE. The other one is the so-called GSSE but is deprecated.
+
+The GOOSE is defined in the IEC 61850-8-1 standard and is commonly used to communicate between servers, such as bay controllers and switchgear control units.
+
+GOOSE does not use TCP/IP but instead utilizes multicast mechanist to be sent to all communication participants in the same LAN/VLAN. Its sending or publishing and its use or subscription are therefore completely separated. This separation also influences the configuration of GOOSE-related communication in the SCL.
+
+*Publishing: GOOSE Control Block (GSEControl)*
+
+The configuration of GOOSE publishers is done in the SCL element `GSEControl` and its referenced `DataSet` element. The reference to its `DataSet` is set through the attribute `datSet` in the `GSEControl` element.
+
+NOTE: `GSEControl` must reside in the `LN0` element, and both `GSEControl` and its referenced `DataSet` must have the same parent.
+
+. Create control block: Create the element `GSEControl` or import SCL with pre-existing `GSEControl` elements.
+. Create data set: Create element `DataSet` in the same parent as the `GSEControl` and add data `FCDA` to it.
+. Combine control block and data set: Set the `datSet` attribute within the `GSEControl` element.
+
+*Publishing: Configuring GOOSEs with OpenSCD*
+
+. https://github.com/openscd/open-scd/wiki/Create-GOOSE-Control-Blocks[Create GOOSE Control Blocks and its DataSet]
+. https://github.com/openscd/open-scd/wiki/Edit-GOOSE-Control-Blocks[Edit GOOSE Control Blocks and its DataSets]
+
+*Subscription: Basics*
+See https://github.com/openscd/open-scd/wiki/Subscriber-Basics[Subscription basics]
+
+*Subscription with OpenSCD*
+See https://github.com/openscd/open-scd/wiki/Subscribe-Complete-GOOSE[Subscription complete GOOSE]

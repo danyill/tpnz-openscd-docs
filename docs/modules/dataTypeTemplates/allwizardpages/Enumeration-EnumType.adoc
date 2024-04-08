@@ -1,0 +1,62 @@
+With OpenSCD, you have the option to either add enumerations that are defined in the standard or create your own user-defined `EnumType`.
+
+____
+*NOTE*: In most cases, enumerations defined in IEC 61850-7-4 and IEC 61850-7-3 are sufficient. It is recommended to use those wherever possible.
+____
+
+image::https://user-images.githubusercontent.com/66802940/132067945-0039b2be-7ad6-4834-a2a6-ac83cd3faa3d.png[alt text,250]
+
+*Add EnumType*
+
+. Navigate to the `EnumType` list and click on *Add EnumType*.
+. Select the desired `EnumType` from the options available in the *values* field.
+
+_Settings_:
+
+. *id*: Ensure that the id is unique throughout the entire project.
+. *desc*: User-defined description field.
+
+_From IEC 61850_
+
+OpenSCD templates contain all enumerations from IEC 61850-7-4 and IEC 61850-7-3. The correct `EnumType` with all possible `EnumVal` child elements are added to the project.
+
+_User-defined_
+
+To define a user-defined `EnumType` from scratch, open the *Add EnumType* wizard and make sure not to select a value. Exercise caution with this option as it adds a blank `EnumType`.
+
+&nbsp;
+
+image::https://user-images.githubusercontent.com/66802940/132069240-5b7cf7ba-15ea-49d0-8bbf-a48027c3252b.png[alt text,250]
+
+*Editing EnumType:*
+
+. Navigate to the `EnumType` list within the *Template editor* and select the desired `EnumType` for editing.
+
+_Settings_:
+
+. *id*: Ensure the id is unique throughout the entire project.
+. *desc*: User-defined description field.
+. List of all child `EnumVal` elements with their respective `ord` attributes and inner text.
+
+_Example_:
+
+----
+<EnumType id="BehaviorModeKind">
+   <EnumVal ord="1">on</EnumVal>
+   <EnumVal ord="2">blocked</EnumVal>
+   <EnumVal ord="3">test</EnumVal>
+   <EnumVal ord="4">test/blocked</EnumVal>
+   <EnumVal ord="5">off</EnumVal>
+</EnumType>
+----
+
+&nbsp;
+
+*Removing EnumType:*
+
+. Open the `EnumType` you wish to remove by selecting *Edit EnumType*.
+. Click on the *Remove* button.
+
+____
+*WARNING*: OpenSCD does not perform validity checks before removal, so exercise caution when deleting EnumTypes.
+____

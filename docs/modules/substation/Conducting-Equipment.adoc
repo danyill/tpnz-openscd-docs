@@ -1,0 +1,45 @@
+*Create ConductingEquipment*
+
+image::https://user-images.githubusercontent.com/66802940/183962761-e5b168bd-94b0-4200-baaa-824e9511aa3a.png[grafik,250]
+
+To create a new `ConductingEquipment` element within the parent `Bay`:
+
+* Navigate to the *Substation* editor.
+* Select the parent *Bay* to which you want to add the conducting equipment.
+* Choose the appropriate type for the conducting equipment.
+* Fill in all the required values.
+* Click on the *Add* button.
+
+The create wizard allows you to set:
+
+* `type`: Choose from a set of predefined types as per the IEC 61850 standard.
+* `name`: Unique identifier of the conducting equipment within the parent `Bay`.
+* `desc`: Human-readable description of the conducting equipment.
+
+*Edit ConductingEquipment*
+
+image::https://user-images.githubusercontent.com/66802940/183963460-6b7e4e5a-5612-441e-bca8-6cd354f1feda.png[grafik,250]
+
+To edit a `ConductingEquipment` element:
+
+* Navigate to the *Substation* editor.
+* Choose the specific *ConductingEquipment* you wish to modify.
+* Click on the *edit* button.
+* Apply the desired changes, then click *Save*.
+
+The `ConductingEquipment` element has two attributes:
+
+* `name`: a unique identifier of the Bay in the parent `Bay`.
+* `desc`: a human-readable description.
+* `type`: cannot be edited!
+
+*Remove ConductingEquipment*
+
+To remove an existing `ConductingEquipment` element within the parent `Bay`:
+
+* Navigate to the *Substation* editor.
+* Select the *ConductingEquipment* you wish to remove.
+* Click on the *delete* button.
+
+NOTE: OpenSCD does not support the definition of user-defined conducting equipment types. This can only be manipulated through the code editor.
+NOTE: The *Earth Switch* is unfortunately not a type but a special version of `DIS`. It can be tagged to an earth switch through the data object `SwType` (a logical node reference to the logical node of class `XSWI`) that must be present. Alternatively, it has a child `Terminal` with a `cNodeName = grounded`. Both of these cases are recognized by OpenSCD and displayed. When you create a new *Earth Switch*, the second option is applied.

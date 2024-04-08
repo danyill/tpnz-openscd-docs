@@ -1,0 +1,28 @@
+The Sampled Value service is designed to transmit current and voltage measurement data via Ethernet, as defined in 9-2. While there is an alternative way using other connection mechanisms, as outlined in IEC 61850-9-1, this method is neither described nor supported in OpenSCD.
+
+Sampled Value Streams utilize a multicast mechanism instead of TCP/IP to send to all communication participants in the same LAN/VLAN. The sending (publishing) and usage (subscription) of Sampled Value Streams are therefore completely separated. This has implications for the configuration of Sampled Value-related communication in the SCL.
+
+*Publishing: Sampled Value Control Block (SampledValueControl)*
+
+The configuration of Sampled Value publishers is done in the SCL element `SampledValueControl` and its referenced `DataSet` element. The reference to its `DataSet` is set through the `datSet` attribute in the `SampledValueControl` element.
+
+NOTE: `SampledValueControl` must reside in the `LN0` element, and both `SampledValueControl` and its referenced `DataSet` must share the same parent.
+
+Configuring the publisher involves three basics steps:
+
+. Create control block: Create the element `SampledValueControl` or import SCL with pre-existing `SampledValueControl` elements.
+. Create data set: Create element `DataSet` in the same parent as the `SampledValueControl` and add data `FCDA` to it.
+. Combine control block and data set: Set the `datSet` attribute within the `SampledValueControl` element.
+
+*Publishing: Configuring Sampled Values with OpenSCD*
+
+. https://github.com/openscd/open-scd/wiki/Create-Sampled-Value-Control-Blocks[Create Sampled Value Control Blocks and its DataSet]
+. https://github.com/openscd/open-scd/wiki/Edit-Sampled-Value-Control-Blocks[Edit Sampled Value Control Blocks and its DataSets]
+
+*Subscription: Basics*
+
+See https://github.com/openscd/open-scd/wiki/Subscriber-Basics[Subscription basics]
+
+*Subscription with OpenSCD*
+
+See https://github.com/openscd/open-scd/wiki/Subscribe-Complete-SMV[Subscription complete Sampled Value Stream]

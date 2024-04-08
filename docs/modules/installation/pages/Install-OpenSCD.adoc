@@ -1,0 +1,53 @@
+= Installation
+
+OpenSCD shall be an easy accessible tool.
+The technology allows you to use on any machine that can run a browser.
+In fact you can simply install it on any machine as a progressive web app - PWA.
+When you have access to world wide web we recommend to use the online version
+
+== Online
+
+There is no need to install.
+You simply have to go to https://openscd.github.io.
+The advantage of this option is that you get out of the box continues delivery.
+That means that any change we do to the software is immediately at your hands.
+
+NOTE: We are not collecting any data nor do you upload any data behind the scenes.
+So you don't have to worry about that.
+The internet connection is only required to check, if you are up-to-date with the latest version and if not to load the missing elements.
+
+You can install OpenSCD as PWA on your machine like so
+
+.Installing OpenSCD
+image::installing_openscd.png[]
+
+* Use `Chrome`, `Chromium` or `Edge`
+* Open `https://openscd.github.io`
+* Click on the installation button
+
+== Offline
+
+OpenSCD can be installed on computers with no World Wide Web connection.
+There are two approaches to do that.
+
+You still have access to a local network (intranet)::
+Ask your IT colleagues and ask them to configure a web server in the intranet and load the version you want to e.g.
+https://github.com/openscd/open-scd/releases/tag/v0.7.0[version 0.7.0] \-> `open-scd.zip`
+
+You have no access to any network::
++
+--
+You have to install a software that allows you to run a web server locally on your machine e.g https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb[Web Server for Chrome]
+
+For `Web Server for Chrome`
+ ** Download a https://github.com/openscd/open-scd/releases[version] of OpenSCD.
+
+To be more precise, the `open-scd.zip`.
+ ** Extract `open-scd.zip`
+ ** Start the web server
+ ** Click on `CHOOSE FOLDER`
+ ** Navigate to the extracted `open-scd` folder (You see folders .git, doc, public and other).
+ ** Click on the web server URL within `Web Server for Chrome`
+
+image::webserver_for_chrome.png[]
+--

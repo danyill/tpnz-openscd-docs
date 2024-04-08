@@ -1,0 +1,28 @@
+= Project Workflow
+
+This page is dedicated to topics related to the project workflow within *OpenSCD*. 
+A fundamental objective of *OpenSCD* is to exclusively store information in SCL files, striving to avoid the use of `private` elements whenever possible. 
+To elaborate, the goal is to refrain from placing information in namespaces that are not defined by the standard. 
+This approach aims to enhance interoperability in multi-vendor projects. It's important to note that avoiding `private` elements doesn't mean that OpenSCD removes them; currently, it simply disregards the private section.
+
+Given that all information in *OpenSCD* is saved in SCL files rather than proprietary formats, a project is essentially synonymous with an SCL file.
+
+== Create new project
+
+. Open *OpenSCD*
+. Click on *New project*
+
+== Open project
+
+. Navigate to the *Menu*
+. Click on *Open project*
+
+NOTE: You can open any kind of SCL type.
+
+== Import information from other SCL files
+
+See more information in xref:Import-IEDs.adoc[]
+
+== Save project
+
+See more information in xref:Save-project.adoc[]

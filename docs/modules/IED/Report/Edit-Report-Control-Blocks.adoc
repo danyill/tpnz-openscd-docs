@@ -1,0 +1,85 @@
+The configuration of Reports, or more precisely Report Control Blocks, is done on the SCL element `ReportControl`, along with its child elements `TrgOpts`. `OptFields` and `RptEnabled`, as well as its referenced `DataSet` element. The schema imposes restrictions on the allocation of these element:
+
+. `ReportControl` must be located in either the `LN0` or `LN` element.
+. Both `ReportControl` and its referenced `DataSet` must share the same parent.
+
+*Editing Report*
+
+When it comes to editing Reports in OpenSCD, the configuration of ReportControl elements is facilitated through what is referred to as wizards. Four combined wizards are available to enable the editing of Reports.
+
+image::https://user-images.githubusercontent.com/66802940/182157943-1d633d14-ec6d-4660-b4f6-2035af2b3279.png[grafik,250]
+
+&nbsp;
+
+The Edit wizard or Create wizard page for the `ReportControl` element itself provides the ability to set various attributes, including:
+
+* `name`: The main identifier for the Report within the SCL. The name must be unique for all `ReportControl` element in the same parent element.
+* `desc`: An optional string describing the `ReportControl` element
+* `buffered`: Indicates whether the report control is buffered.
+* `rptID`: A unique identifier for the Report. If an empty string is provided, the ID will be set to the Report Control Block reference (path to the Report Control Block in the data model)
+* `indexed`: Specifies whether there can be multiple instances of the Report online. This is necessary When more than one client wants to use the same Report, considering that only one client can work with the Report at a time due to the TCP/IP type connection.
+* `max Clients`: Represents the maximum number of instances the IED needs to instantiate at power-up. This field reflects the attribute `max` in the child element `RptEnabled`.
+* `bufTime`: The minimum time in [ms] between two Report messages online.
+* `intgPd`: The time in [ms] between two Report messages triggered periodically.
+
+To apply changes to any of these attributes, you need to click on the Save button within the wizard.
+
+&nbsp;
+
+*Editing Trigger Options*
+
+image::https://user-images.githubusercontent.com/66802940/182178318-64a70504-0c15-4ddb-ac7e-ad7a1299b1f3.png[grafik,250]
+
+The wizard for the Reports child element `TrgOps` (Trigger Options) enables the definition of how a Report is triggered once activated. Here are the options:
+
+. `dchg`: A report is sent if any data in the dataset changes in the data model. For example, if the trip signal of a protection function changes from false to true.
+. `qchg`: A report is sent if the quality of any of the data changes. Quality is a bit string that specifies the current quality of information and allows indicators on the quality reason. This setting is effective only if the quality information is part of the dataset.
+. `dupd`: Some data can be triggered on data update in addition to data change. This is often the case for measurement information. Let's assume you want to track our secondary voltage measurement, that is nominally 100 V. If everything work well you do not see any changes in the secondary voltage that you track but you might want to be still be updated from time to time. This trigger is active whenever the value is updated in the data model, regardless of whether the value itself has changed.
+. `period`: If set to true, it triggers the Report periodically depending on the `intgPd` attribute in the parent `ReportControl`.
++
+NOTE: If `period` is set to true but `intgPd` is set to 0, the trigger condition is disabled
+
+. `gi`: Stands for general interrogation and allows the active triggering of Report generation only. It simulates a master-slave behavior that the Report services are designed to avoid.
+
+&nbsp;
+
+*Editing Optional Fields*
+
+image::https://user-images.githubusercontent.com/66802940/182181029-537688ce-6018-4f3a-8454-11e9c0a2505e.png[grafik,250]
+
+The wizard for Reports' child element `OptFields` (Optional Fields) allows the definition of extra information that the Report message includes in addition to the data itself. Here are the options:
+
+. `seqNum`: Represents the sequence number of the Report message. Each time a new Report is generated, the sequence number is incremented.
+. `timeStamp`: Indicates the timestamp when the Report message was generated.
++
+NOTE: This is not the time of the data change in the Report but rather the time of the Report's generation. The coding of this specific time may differ from those in the dataset of the report and is not as precise.
+
+. `dataSet`: Refers to the `DataSet` connected with this Report. This allows double-checking if the correct data is sent with the Report.
+. `reasonCode`: Represents the trigger option that triggered the generation of the Report, such as data change or quality change.
+. `dataRef`: Includes references to all data in the dataset of the Report. This allows the client to decode a Report without knowing the structure of the dataset.
+. `entryID`: Represents the ID in the buffer for the Report. This is used for buffered Reports to retrieve only Reports from the buffer that have not been sent before.
+. `configRev`: Represents the `confRev` attribute of the Report. It allows checking if the Report has been re-configured.
+. `bufOvfl`: Indicates whether there has been an overflow of the buffer.
+
+*Editing data set (DataSet)*
+
+____
+See data set wizard
+____
+
+&nbsp;
+
+*Navigating between wizard*
+
+image::https://user-images.githubusercontent.com/66802940/182178064-c629d7f3-2bc5-464b-8069-88f0f8680d42.png[grafik,250]
+
+Each wizard represents one element in the SCL. To navigate between them, click on the *more vert* icon button on the upper left corner. The pop-up menu shows various choices.
+
+. Remove the `ReportControl` element, including all its child elements: `TrgOps`, `OptFields`, and `RptEnabled`.
++
+NOTE: If the referenced `DataSet` element is exclusively referenced to this Report, it will be removed as well.
+
+. Open the data set wizard for the `DataSet` referenced to this Report.
+. Open the trigger options wizard.
+. Open the optional fields wizard.
+. Allow deep copying of the Report to other IEDs.

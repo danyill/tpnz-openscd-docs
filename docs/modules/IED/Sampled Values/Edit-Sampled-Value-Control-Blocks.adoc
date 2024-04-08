@@ -1,0 +1,73 @@
+The configuration of Sampled Values, or more precisely Sampled Value Blocks, is done on the SCL element `SampledValueControl`, its referenced `DataSet` element, and its referenced `SMV` element allocated in the `Communication` section. The schema restricts the allocation of the element in the following way:
+
+. `SampledValueControl` must reside in the `LN0` element.
+. `SampledValueControl` and its referenced `DataSet` must have the same parent.
+. `SMV` can only exist if the access point (`ConnectedAP`) of the server is connected to a sub-network (`SubNetwork`) in the `Communication` section.
+
+*Editing Sampled Values*
+
+In OpenSCD, `SampledValueControl` elements are configured using so-called wizards. There are three wizards combined that allow the editing of Sampled Value Control Blocks.
+
+image::https://user-images.githubusercontent.com/66802940/183037382-03113028-29f7-4e73-ba02-1bff38fc7344.png[grafik,250]
+
+&nbsp;
+
+The wizard contains a set of settings allocated in the element `SampledValueControl`:
+
+* `name`: The main identifier for the Sampled Value within the SCL. It must be unique for all `SampledValueControl` elements in the same parent element and influences the Sampled Value Control Block reference.
+* `desc`: An optional string describing the `SampledValueControl` element.
+* `multicast`: Only visible when false, as non-multicast sampled value streams are deprecated.
+* `smvID`: A unique identifier for the Sampled Value.
+* `smpMod`: The mode in which the sample rate is expressed. Options include Samples per period, sampled per second, or Seconds per sampled. The default is Samples per period
+* `smpRate`: The sample rate, dependent on the sample mode.
+* `noASDU`: Timestamps per Ethernet packet.
+* `securityEnabled`: Specifies the type of security measures the Sampled Value has: encryption and/or signature, or none of the two.
+
+To change any of the attributes, click on the *Save* button within the wizard.
+
+&nbsp;
+
+*Editing the Optional information page*
+
+image::https://user-images.githubusercontent.com/66802940/183042678-a6ec19b1-4b26-4681-891c-3b3d658092be.png[grafik,250]
+
+This wizard enables the configuration of optional behaviors for the sampled value stream.
+
+. `refreshTime`: Specifies whether the timestamp of the generation of the sample value stream shall be included.
+. `sampleRate`: Determines whether the sample rate and sample mode shall be part of the sampled value stream.
+. `dataSet`: Specifies whether the data set reference shall be part of the sampled value stream.
+. `security`: Determines whether the sampled value stream contains the security attribute (Used for future definitions such as digital signature).
+. `synchSourceId`: Specifies whether the the sampled value stream contains the synchronizing grand master ID.
++
+&nbsp;
++
+image::https://user-images.githubusercontent.com/66802940/183041967-68d158b7-62c4-4aa2-90c1-b0f52bbf2232.png[grafik,250]
+
+*Communication page*
+
+This wizard allows you to define all communication-related settings for the Sampled Value. This information is saved in the `Communication` section, more precisely in the element `SMV`.
+
+. `MAC-Address`: Specifies the destination MAC address of the Sampled Value, ranging from `01-0C-CD-04-00-00` to `01-0C-CD-04-01-FF`.
+. `APPID`: Sets the APPID of the Sampled Value, and it is recommended to be unique throughout the entire project.
+. `VLAN-ID`: Determines the virtual LAN ID to which the Sampled Value shall be limited.
+. `VLAN-PRIORITY`: Sets the priority of the Sampled Value message, allowing prioritization of time-critical messages like trip signals over non-time-critical messages.
++
+&nbsp;
+
+*Editing data set (DataSet)*
+
+____
+See data set wizard
+____
+
+&nbsp;
+
+image::https://user-images.githubusercontent.com/66802940/183048016-bbf17f11-20a3-4871-8439-36ca1b8a6005.png[grafik,250]
+
+*Navigating between wizard*
+
+Each wizard represents one element in the SCL. To navigate between them, click on the *more vert* icon button in the upper-left corner. The pop-up menu display various choices.
+
+. Remove the `SampledValueControl` element. If its referenced data set is exclusively linked to this control block, it will be removed as well.
+. Open the data set wizard for the `DataSet` referenced by this Sampled Value.
+. Open the communication wizard.

@@ -1,0 +1,47 @@
+*Create Subnetwork*
+
+image::https://user-images.githubusercontent.com/66802940/183637448-46be9646-e3c6-428f-96e4-ca6f61c93363.png[grafik,250]
+
+To create a `SubNetwork` element, follow these steps:
+
+. Navigate to the *Communication* editor.
+. Click on the *Add Subnetwork* button.
+. Fill in the required data and click *Add*.
+
+The creation wizard for the `SubNetwork` allows you to set:
+
+* `name`: The identifier for the subnetwork in the `Communication` section.
+* `desc`: A description of this element.
+* `type`: The type of subnetwork you are building, e.g., 8-MMS for IEC 61850.
+* `BitRate`: The value itself and the multiplier. The Unit is always fixed to `b/s`.
+
+&nbsp;
+
+*Edit Subnetwork*
+
+image::https://user-images.githubusercontent.com/66802940/183638280-9d1600e7-08ee-4a2a-bf83-216b84185fc3.png[grafik,250]
+
+To edit a `SubNetwork` element, follow these steps:
+
+. Navigate to the *Communication* editor.
+. Click on the *Subnetwork* you want to configure.
+. Fill in the required data and click *Save*.
+
+The edit wizard for the `SubNetwork` allows you to set:
+
+* `name`: The identifier for the subnetwork in the `Communication` section.
+* `desc`: A description of this element.
+* `type`: The type of subnetwork you are building, e.g., 8-MMS for IEC 61850.
+* `BitRate`: The value itself and the multiplier. The Unit is always fixed to `b/s`.
+
+&nbsp;
+
+*Remove Subnetwork*
+
+To remove a subnetwork from the existing file, follow these steps:
+
+. Navigate to the *Communication* editor.
+. Click on the *Subnetwork* you want to remove.
+. Click on the *delete* button.
+
+NOTE: Deleting the subnetwork will also remove all its children.

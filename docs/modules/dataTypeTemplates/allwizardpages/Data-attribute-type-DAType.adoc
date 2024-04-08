@@ -1,0 +1,75 @@
+*Add DAType*
+
+image::https://user-images.githubusercontent.com/66802940/132105466-55a9ace1-84d5-4ab3-83b8-ad4cb4195cf7.png[alt text,250]
+
+. Navigate to the list of ``DAType``'s in the *Template editor*.
+. Click on *Add DAType*.
+. Select either a `DAType` from the template library or leave the *value* field empty for a new one.
+
+_Settings_:
+
+* *id**: Ensure that the ID is unique within the entire project.
+* *desc*: User-defined description field.
+
+_From IEC 61850_
+
+OpenSCD templates contain all data attribute types from IEC 61850-7-3. Unlike `EnumType`, most pre-defined ``DAType``s offer more flexibility in their definition. For example, you can examine the definition of the `AnalogueValue` as specified in the link:[NSD] files.
+
+----
+<ConstructedAttribute name="AnalogueValue"
+    titleID="IEC61850_7_3.AnalogueValue::AnalogueValue.cl.title">
+    <SubDataAttribute name="i"
+        type="INT32"
+        ...
+        presCond="AtLeastOne"
+        presCondArgs="1"/>
+    <SubDataAttribute name="f"
+        type="FLOAT32"
+        ...
+        presCond="AtLeastOne"
+        presCondArgs="1"/>
+</ConstructedAttribute>
+----
+
+The definition, especially the attribute `presCond`, provides the flexibility to decide whether one or both can be children of the `AnalogueValue`. This means that as a user, you must determine the structure of your `AnalogueValue`. In OpenSCD templates, most ``DAType``s include all possible children by default. You can then remove unnecessary children to customize the `DAType` according to your requirements.
+
+NOTE: ``DAType``s in the OpenSCD templates often include all possible children. Please verify if you truly need all of them. Refer to the standard's `DAType` definition for clarification.
+
+_User-defined_
+
+An empty `DAType` is added to the project, which is often invalid in many cases, so do not consider the process complete at this stage.
+
+&nbsp;
+
+*Edit DAType*
+
+image::https://user-images.githubusercontent.com/66802940/132105442-e3518994-5369-4342-ab1a-8a70a9133ed1.png[alt text,250]
+
+. Navigate to the list of ``DAType``s in the *template editor*.
+. Click on the `DAType` you wish to edit.
+
+_Settings_:
+
+. *id**: Ensure that the ID is unique across the entire project.
+. *desc*: User-defined description field.
+. List of all child `BDA`: This section displays the ID and type (`bType`) of each child `BDA`. If the type starts with *#*, it indicates that the `BDA` is either a constructed attribute or an enumeration.
+
+_Example_:
+
+----
+<DAType id="OpenSCD_Originator">
+    <BDA name="orCat" bType="Enum" type="OriginatorCategoryKind"/>
+    <BDA name="orIdent" bType="Octet64"/>
+</DAType>
+----
+
+&nbsp;
+
+*Remove DAType*
+
+. Open the `DAType` you wish to remove in the *Edit DAType* wizard.
+. Click on the *Remove* button.
+
+____
+*WARNING*: OpenSCD does not perform validity checks before removal, so exercise caution when deleting elements.
+____

@@ -1,0 +1,53 @@
+*Add new SDO*
+
+image::https://user-images.githubusercontent.com/66802940/133858960-4cde1946-f2be-49f1-ad24-1477913d9289.png[alt text,250]
+
+You can utilize OpenSCD to include new ``SDO``s within an existing `DOType`. Follow these steps:
+
+. Navigate to the `DOType` you wish to modify and open the *Edit DOType* wizard.
+. Click on the *DATA OBJECT* button located in the middle of the wizard.
+
+_Settings_:
+
+. *name**: When selecting a `SDO` from the IEC 61850 namespace, refer to IEC 61850‑7‑4. Otherwise, ensure that the name begins with an uppercase letter [A-Z].
+. *desc*: This field allows for user-defined descriptions.
+. *type**: While the type is defined as a string in the SCL, it appears as a selector in OpenSCD. The selector displays all `DOType` - ``id``'s available in the project. Without existing ``DOType``s, you cannot create a `DO`.
+
+____
+*CHECKS*: The schema validator handles cases of missing or incorrect `name`, while the template validator addresses issues related to missing or incorrect `type`.
+____
+
+image::https://user-images.githubusercontent.com/66802940/133859075-dbdf88a4-a96d-4af1-93ac-e1ec923edbe7.png[alt text,250]
+
+*Edit DO*
+
+You can utilize OpenSCD to modify existing `DO` elements. Follow these steps:
+
+. Navigate to the list of ``DOType``s in the *template editor*.
+. Select the `DOType` that includes the `SDO`. For example, choose the common data class `WYE`.
+. Click on the specific child `SDO` you wish to modify to open the *Edit SDO* wizard.
+
+&nbsp;
+
+_Settings_:
+
+The settings available are identical to those in the *Add SDO* wizard, with the additional option to remove the selected `SDO`.
+
+_Example:_
+
+----
+<SDO  name="res" type="ABBIED600_Rev5_CMV_1"/>
+----
+
+&nbsp;
+
+*Remove SDO*
+
+To remove a SDO from a DOType, follow these steps:
+
+. Open the *Edit SDO* wizard.
+. Click on the *Remove* button.
+
+____
+*WARNING*: Exercise caution when removing SDOs, as OpenSCD does not perform validity checks before deletion.
+____

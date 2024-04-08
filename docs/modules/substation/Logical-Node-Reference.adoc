@@ -1,0 +1,68 @@
+&nbsp;
+
+Logical node references are not visible as long as the function structure is filtered. (see https://github.com/openscd/open-scd/wiki/Function[Function] for more detail). Once the function structure is visible, logical node references are displayed using the first letter of the logical node class, such as *P* for protection or *C* for control. Each element is accompanied by an action icon. Clicking on this icon reveals available actions, including edit, duplicate, and remove.
+
+*Edit Logical Node Reference*
+
+The wizard does not enable direct manipulation of the logical node reference, but it provides additional insight into its structure for troubleshooting in incorrect SCL files.
+
+&nbsp;
+
+*Remove Logical Node Reference*
+
+Removes the logical node reference from the parent element.
+
+&nbsp;
+
+*Duplicate Logical Node Reference*
+
+This feature is permitted on logical node references with `iedName = None` (pointer into the data type template). It facilitates faster instantiation of identical logical nodes from the data type templates section by cloning an existing one and incrementing the logical node instance (`lnInst`). For instance, if you require 7 zones for a distance protection, each being a logical node of the class `PDIS`, you can add one using the create wizard, and the others can be cloned using the duplicate feature.
+
+&nbsp;
+
+*Create Logical Node instance*
+
+image::https://user-images.githubusercontent.com/66802940/183967245-063e72aa-163a-44f6-b0ca-5c6aa1c7d106.png[grafik,250]
+
+image::https://user-images.githubusercontent.com/66802940/183966897-1bf30296-9132-4224-9fba-754a0f17c2dc.png[grafik,250]
+
+To create a new logical node reference, you can either
+
+* click on the icon image:https://user-images.githubusercontent.com/66802940/183966575-b7b6aff3-db56-46b5-8aa1-f3f2786b460f.png[grafik,20]
+or
+* navigate to the element where you want to add the logical node reference.
+* click on the *add more* icon.
+* Click on the *LNode*.
+
+&nbsp;
+
+*Reference to instantiated Logical Node in IED*
+
+To create a reference to a logical node within an IED, follow these steps:
+
+. Navigate to any process structure type element in the substation section.
+. Click on the corresponding icon as shown at the beginning of the article. This will open a wizard with two pages.
+
+_Select IED_
+This page allows you to select the IED from which you want to reference the logical node.
+
+_Select Logical Node_
+
+This page displays all logical nodes from the selected IEDs. Since IEDs can have numerous logical node references, we recommend using the filter function to narrow down your search. You can filter by the IED, logical device, prefix, and class of the logical node you want to reference.
+
+NOTE: If the logical node has already been referenced to another element in the substation, OpenSCD will not allow you to reference it twice.
+
+&nbsp;
+
+*Reference to typical Logical Node in DataTypeTemplates section*
+
+image::https://user-images.githubusercontent.com/66802940/183970914-4e49c7d7-b9b3-4b78-93db-236dcd76f5f8.png[grafik,250]
+
+To create a reference to a template logical node in the data type templates section of the file, navigate to one of the functional structure elements like `Function`, and click on the *add more* button. Then, select *LNode* from the options. The wizard will display all `LNodeType` elements with their `lnClass` and `id` on a single page.
+
+NOTE: While you can select multiple templates, you cannot create multiple instances of the same template in this wizard. For duplicating templates, refer to the duplicate feature described in this article.
+
+NOTE: You can switch between the wizard for instantiating a new logical node and the one for referencing an instantiated logical node. Click on the *more_vert* button on the upper right corner of the wizard, then select the desired option from the list.
+
+image:https://user-images.githubusercontent.com/66802940/183976043-3e56acf7-641c-4568-a5af-546a599f7f0a.png[grafik,250]
+image:https://user-images.githubusercontent.com/66802940/183976150-fcc738a6-8240-458d-988e-5b9e343e1e9f.png[grafik,220]

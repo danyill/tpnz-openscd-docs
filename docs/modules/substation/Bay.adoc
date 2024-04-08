@@ -1,0 +1,39 @@
+*Create Bay*
+
+image::https://user-images.githubusercontent.com/66802940/183960578-a50a489c-9e0e-489e-bdb5-aeb97f240082.png[grafik,250]
+
+To create a new `Bay` element within the parent `VoltageLevel`:
+
+. Navigate to the *Substation* editor.
+. Select the parent *VoltageLevel* to which you want to add the bay.
+. Fill in all the required values.
+. Click on the *Add* button.
+
+The create wizard allows you to set:
+
+* `name`: a unique identifier for the bay within the parent `VoltageLevel`.
+* `desc`: a human-readable description.
+
+*Edit Bay*
+
+image::https://user-images.githubusercontent.com/66802940/183960790-d6c32f25-e829-4990-81be-2372c75fccbe.png[grafik,250]
+
+To edit a `Bay` element:
+
+* Navigate to the *Substation* editor.
+* Select the specific *Bay* you want to edit.
+* Click on the *edit* button.
+* Make the necessary changes and then click *Save*.
+
+The `Bay` element has two attributes:
+
+* `name`: a unique identifier for the bay within the parent `VoltageLevel`.
+* `desc`: a human-readable description.
+
+*Remove Bay*
+
+To remove an existing `Bay` element within the parent `VoltageLevel`:
+
+* Navigate to the *Substation* editor.
+* Select the specific *Bay* you want to remove.
+* Click on the *delete* button.

@@ -1,0 +1,8 @@
+= Global SCL Manipulation
+
+This page explains features that have a global character and are not related to a specific process within an SCL.
+They can be utilized for a wide range of tasks.
+Currently, there is a:
+
+* xref:Merge-functionality.adoc[]
+* xref:XML-code-editor.adoc[]

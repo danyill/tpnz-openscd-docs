@@ -1,0 +1,60 @@
+= Merge or Diff
+
+Merge is a fundamental functionality that enables the importation of information from other files or the updating of existing elements with information from other files.
+
+To understand what *OpenSCD* is doing behind the scenes, we need to explain two terms first:
+
+. Same: Two elements are considered the same if they share identical identities.
+In the context of OpenSCD, the identity of all elements is defined based on a set of unique attributes within the element's hierarchy.
+For instance, a `Bay` element must possess a `name` attribute that is unique within the `VoltageLevel` according to the standard.
+This is the id for this element.
+The same is true vor all parent elements until the `SCL` tag.
+The identity of a "Bay" element, therefore, comprises all `name` attributes separated by `>` symbols, such as `AA1>E1>Q01`. Other elements may have different identifiers, like the `id` attribute of the `LNodeType` element.
+In some cases, the index is utilized to construct the identity.
+. Equal: Two elements are equal if they and all their children are identical, and their attributes match.
+
+The merge functionality utilizes these two attributes of elements to determine differences and facilitates merging elements from different files.
+
+To utilize this functionality, you can click on *Merge Project* or *Update Substation*.
+
+== Merge Project
+
+image::merge_functionality.png[]
+
+. Edit: Attributes same - element's - imported and existing - are present but differ.
+For example, in the existing element, it is named _Bay01_, while in the imported one, it is named _Bay Q01_.
+. Add: An attribute or a child element is present in the imported file but not in the existing file.
+. Delete: An attribute is present in the existing but not in the imported same element or a same child element is present in the existing but not in the imported file.
+For example, the attribute _sxy:x_ exists in the existing file but not in the imported one.
+. Merge: The elements in both the existing and imported files are the same but differ in attributes and/or child elements.
+
+The merge process is a step-by-step procedure that begins with the root element `SCL`, then progresses through all its child elements.
+This means that you will encounter a wizard page for each child element that is not the same.
+Once these differences are addressed, the process moves on to the child elements of the selected element.
+
+As an example let's assume you imported a file that differs in one `DO` definition within a `LNodeType` - `desc`, a `LN` definition with one of four `IED` elements and within one of three `Bay` elements within a `Substation` - here `desc` again is different.
+
+. The merge process begins with the `SCL` element, indicating that three elements are not equal and can be merged: `Substation`, one `IED`, and the `DataTypeTemplates`. Suppose you choose to merge only the `Substation` and the `DataTypeTemplates`, leaving out the `IED`.
+. The next wizard page displays the `Substation` element, indicating that the `VoltageLevel` is not equal and can be merged.
+Let's assume there is only one `VoltageLevel`, so you select it.
+. The subsequent step presents the `DataTypeTemplates` element, indicating that one `LNodeType` is not equal, and you opt to merge it.
+. Following that, the `Bay` element is presented.
+Here, the `desc` attribute differs, and you have the option to edit it.
+No child elements are shown as they are identical.
+. Next, the `LNodeType` element is displayed, revealing the one `DO` child element that is not equal.
+. Lastly, the `DO` element differs in the `desc` attribute, allowing you to decide whether to edit it.
+
+== Update Substation
+
+The distinction between *Merge Project* and *Update Substation* lies in the fact that the latter specifically targets the `Substation` element, and the process is automated.
+To streamline the user experience and reduce complexity, we have simplified the options.
+Specifically, the selection is predefined to be:
+
+. Edit: selected
+. Add: selected
+. Delete: de-selected
+. Merge: selected
+
+To ensure the production of valid files and prevent inadvertent invalidations, elements of `LNode` are checked before editing or adding to ensure their uniqueness within the `Substation` element.
+Additionally, they are required to reference an existing `LN` or `LN0` within the project.
+For instance, if the imported project contains an `LNode` that references a logical node not present in the existing project, the `LNode` element is ignored.

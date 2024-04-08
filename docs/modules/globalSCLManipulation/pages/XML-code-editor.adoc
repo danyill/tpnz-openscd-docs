@@ -1,0 +1,21 @@
+In *OpenSCD*, elements are manipulated using wizard pages.
+If a page hasn't been created for a specific element you wish to manipulate, or if you're simply curious about how the element appears in XML, we've incorporated a *pro mode* that you can activate in the *Settings*.
+
+.Code Editor
+image::code_editor.png[]
+
+Here's a step-by-step guide:
+
+. Open *Menu*
+. Click on *Setting*
+. Click on switch *pro mode*
+
+Once this is completed, you can open any wizard page, such as *Edit Substation*. On the upper right corner, you'll find a toggle button.
+Clicking this button makes the wizard page disappear, revealing the XML code editor containing the raw XML representation of the element.
+
+.Settings
+image::settings.png[]
+
+NOTE: This feature is designed for experienced users.
+It allows you to modify SCL content, effectively replacing the element entirely with the updated version behind the scenes.
+Rest assured, you have the flexibility to undo any changes at any time.

@@ -1,0 +1,23 @@
+|===
+| Description | Icon
+
+| Move button
+| image:https://github.com/openscd/open-scd/assets/146732918/3b5218ec-5e7c-4da8-91cc-f6a4a371c0b2[,55]
+|===
+
+The "Move" button within the Substation plug-in facilitates the relocation of Substation, Voltage Level, and Bay blocks within the OpenSCD workspace. Users can use this button to shift blocks from left to right and vice versa.
+
+image::https://github.com/openscd/open-scd/assets/146732918/b48fb552-9fb6-4676-a96a-49d2ba93bef9[image]
+
+For example, consider the image below, showcasing one Substation with a single Voltage Level and multiple Bay blocks. This document provides an explanation of how this function operates within the Substation plug-in.
+
+To move the Q01-Bay block next to the BusBar A block, users should click the Move button of the Q01-Bay block, then select BusBar A. Subsequently, the Q01-Bay block will be positioned to the left of BusBar A. Refer to the images below for a visual representation of these changes.
+
+image:https://github.com/openscd/open-scd/assets/146732918/10264151-58c4-4853-8194-a054edcbbd10[image]
+image:https://github.com/openscd/open-scd/assets/146732918/f9b6056e-1660-43c4-bcc4-73215c4d52a6[image]
+
+Another example involves moving the BusBar B. To shift BusBar B to the left side of the blocks, users click the Move button of the BusBar B block and then select the BayA-FieldA block. As shown below, the BusBar B block is moved to the left side of the chosen block (BayA-FieldA).
+
+image::https://github.com/openscd/open-scd/assets/146732918/39e7d078-1b66-4505-99f3-25d085fd8441[image]
+
+It's essential to note that the block to be moved always positions itself to the left side of the selected block.

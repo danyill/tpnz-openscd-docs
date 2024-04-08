@@ -1,0 +1,82 @@
+The `Communication` section within an SCL file allows for the specification of the network, its access points, and the configuration of each access point.
+
+It includes at least one `SubNetwork` as its child element, which can be configured through the child element `BitRate`. Each `SubNetwork` can have multiple `ConnectedAP` elements, which serve as pointers to IEDs ``AccessPoint``s, defined by attributes `iedName` and `apName`. Each `ConnectedAP` id associated with one `Address` element, and within it, there are `P` elements corresponding to the settings for that particular access point.
+
+A `P` element is structured as follows:
+
+[,xml]
+----
+<P type="IP">192.168.210.122</P>
+----
+
+Here, the `type` attribute defines the setting type, and the inner text (here 192.168.210.122) of the element defines the setting value. OpenSCD supports various other optional setting types for configuration:
+
+* IP
+* IP-SUBNET
+* IP-GATEWAY
+* OSI-TSEL
+* OSI-SSEL
+* OSI-PSEL
+* OSI-AP-Title
+* OSI-AP-Invoke
+* OSI-AE-Qualifier
+* OSI-AE-Invoke
+* OSI-NSAP
+* VLAN-ID
+* VLAN-PRIORITY
+* SNTP-Port
+* MMS-Port
+* DNSName
+* UDP-Port
+* TCP-Port
+* C37-118-IP-Port
+* IPv6
+* IPv6-SUBNET
+* IPv6-GATEWAY
+* IPv6FlowLabel
+* IPv6ClassOfTraffic
+* IPv6-IGMPv3Src
+* IP-IGMPv3Sr
+* IP-ClassOfTraffic
+
+Each is backed up with pattern check against the pattern defined in the schema (2007B4).
+
+A very typical `Communication` section might look like this:
+
+[,xml]
+----
+<SubNetwork type="8-MMS" name="Stationbus" desc="Subnetwork">
+    <BitRate unit="b/s" multiplier="M">10</BitRate>
+    <ConnectedAP iedName="AA1E1Q04MU" apName="AP1">
+        <Address>
+            <P type="IP">192.168.210.142</P>
+            <P type="IP-SUBNET">255.255.255.0</P>
+            <P type="IP-GATEWAY">192.168.210.1</P>
+            <P type="OSI-PSEL">00000001</P>
+            <P type="OSI-SSEL">0001</P>
+            <P type="OSI-TSEL">0001</P>
+            <P type="OSI-AP-Title">1,3,9999,23</P>
+            <P type="OSI-AE-Qualifier">23</P>
+        </Address>
+    </ConnectedAP>
+    <ConnectedAP iedName="AA1E1Q02BCU" apName="AP1" redProt="prp">
+        <Address>
+            <P type="IP">192.168.210.121</P>
+            <P type="IP-SUBNET">255.255.255.0</P>
+            <P type="IP-GATEWAY">192.168.210.1</P>
+            <P type="OSI-PSEL">00000001</P>
+            <P type="OSI-SSEL">0001</P>
+            <P type="OSI-TSEL">0001</P>
+            <P type="OSI-AP-Title">1,3,9999,23</P>
+            <P type="OSI-AE-Qualifier">23</P>
+        </Address>
+    </ConnectedAP>
+</SubNetwork>
+----
+
+NOTE: in addition to the namespace `+xmlns="http://www.iec.ch/61850/2003/SCL"+` SCL files can also include `+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"+`. This inclusion facilitates faster parsing of an SCL file for communication type configuration. An example of a `P` type element is provided below:
+
+[,xml]
+----
+<P xsi:type="tP_IP" type="IP">192.168.210.122</P>
+----

@@ -1,0 +1,5 @@
+The *template editor* provides you with the tools to create the elements that collectively form the data model. To accomplish this task, there are 10 wizard pages, each dedicated to one of the elements found in the `DataTypeTemplates` section.
+
+* https://github.com/openscd/open-scd/wiki/Enumeration-EnumType[EnumType]
+* https://github.com/openscd/open-scd/wiki/Enumeration-EnumVal[EnumVal]
+* link:[EnumVal]

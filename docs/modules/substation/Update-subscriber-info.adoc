@@ -1,0 +1,37 @@
+A `GOOSE` and `Sampled Value` are services defined in `IEC 61850-8-1`, `IED 61850-9-2`, respectively. These services can be configured whithin a SCL file. Both the sending end and the receiving end can be configured - acting as the publisher and subscriber, respectively.
+
+== Sending End Configuration
+
+Sending end configuration means creating a GOOSE control block `GSEControl` and connect this to a `DataSet` with the attribute `datSet`. The `DataSet` contains all the data, including functional constrained data attributes `FCDA`, that is sent with the GOOSE message.
+
+== Receiving End Configuration
+
+The receiving end - or subscriber - is defined using the SCL elements `ExtRef` (external reference) and `IEDName`.
+
+[discrete]
+==== 1) `IEDName`
+
+The `IEDName` element is located in the publisher `IED` and contains a reference to the subscriber `IED`(s). It is optional and therefore not implemented in all tools.
+
+[discrete]
+==== 2) `ExtRef`
+
+The `ExtRef` element is located in the subscriber IED and contains a reference to the data attribute that is used by the subscriber.
+
+NOTE: In Edition 2, attributes have been introduced to the `ExtRef` element to identify the control block carrying the information. Previously, this information had to be parsed from the publisher IED.
+
+The function *Update subscriber* is designed to address this. With this feature, you can add the missing `IEDName` elements into an SCL file. To utilize this feature, follow these steps:
+
+. Open the project you want to update.
+. Navigate to Menu \-> *Update Subscriber Info*.
+. Check the log to see how many `IEDName` element(s) are added to the project.
+
+The algorithm works as follows:
+
+. Get `ExtRef`.
+. Find connected `FCDA`.
+. Find the control block connected to the `DataSet` of the `FCDA`.
+. Check if the `IEDName` information is in the control block.
+. If not, add it.
+
+NOTE: In Edition 1, only the IED name could be added to the `IEDName` element. With Edition 2 and higher, you can also add the path down to the logical node level.

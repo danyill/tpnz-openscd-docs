@@ -1,0 +1,67 @@
+*Add LNodeType*
+
+image::https://user-images.githubusercontent.com/66802940/133859718-d1fddf5b-2d5f-4ed1-92ed-1e111ee3c460.png[alt text,200]
+
+To add a Logical Node Type (`LNodeType`) using OpenSCD, follow these steps:
+
+. Navigate to the list of `LNodeType` in the *template editor*.
+. Click on *Add LNodeType*.
+. Select a logical node class from the *lnClass* field.
+. You can choose a pre-defined lnClass from templates or create your own lnClass with the help of OpenSCD.
+
+_Settings_:
+
+. *id*: Ensure that the id is unique in the entire project.
+. *desc*: User-defined description field.
+
+_From IEC 61850_
+
+See details how to link:[start from templates database]
+
+_User-defined_
+
+See details how to link:[start from scratch]
+
+image::https://user-images.githubusercontent.com/66802940/133859990-29701010-ced0-465b-80df-07184904d58d.png[alt text,250]
+
+&nbsp;
+
+*Edit LNodeType*
+
+To modify an existing LNodeType, follow these steps:
+
+. Navigate to the list of ``LNodeType``'s in the *template editor*.
+. Click on the `LNodeType` that you want to edit.
+
+&nbsp;
+
+_Settings_:
+
+. *id**: Ensure that the id is unique within the entire project.
+. *desc*: User-defined description field.
+. *lnClass**: The class according to IEC 61850-7-4.
+. List of all child `DO`: Each item displays the `id` as well as the type reference to `DOType`. `DO` must have a `type` attribute.
+
+&nbsp;
+
+*Remove LNodeType*
+
+. Open the `LNodeType` you want to remove by selecting *Edit LNodeType*.
+. Click on the *Remove* button.
+
+____
+*WARNING*: OpenSCD does not perform validity checks before removal, so exercise caution when removing elements.
+____
+
+_Example_:
+
+----
+<LNodeType lnClass="CILO" id="myCILO">
+    <DO name="Mod" type="OpenSCD_ENCMod"/>
+    <DO name="Beh" type="OpenSCD_ENSBeh"/>
+    <DO name="Health" type="OpenSCD_ENSHealth"/>
+    <DO name="NamPlt" type="OpenSCD_LPLnoLD"/>
+    <DO name="EnaOpn" type="OpenSCD_SPSsimple"/>
+    <DO name="EnaCls" type="OpenSCD_SPSsimple"/>
+</LNodeType>
+----

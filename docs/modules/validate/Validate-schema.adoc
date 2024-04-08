@@ -1,0 +1,5 @@
+Schema validation serves as a critical validation tool, ensuring that there are no schema-related issues when saving the project. Since the schema defines the structure of the SCL, it guarantees interoperability and should be considered a fundamental requirement.
+
+Under the hood, we utilize the industry-standard for schema validation https://en.wikipedia.org/wiki/Libxml2[libxml2]. The external library can also be utilized by other web-based tools. We have created another repository, https://github.com/openscd/xmlvalidate.js[xmlvalidate.js], which enables the use of schema validation.
+
+The results of schema validation, including any issues encountered, are displayed in the *diagnostics* pane. It's essential to note when there are no issues, indicating successful schema validation, which is ultimately the desired outcome.

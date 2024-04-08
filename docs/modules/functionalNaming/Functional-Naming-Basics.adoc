@@ -1,0 +1,66 @@
+Functional naming is a concept that enables the creation of a structured data model within an IED based on the functional hierarchy within a substation. This hierarchy consists of four elements: `Function`, `SubFunction`, `EqFunction`, and `EqSubFunction`. `SubFunction` is a child of `Function` or another `SubFunction`, while `EqSubFunction` is a child of `EqFunction` or another `EqSubFunction`.
+
+`Function` elements are used to define functional structure for non-equipment process elements such as `Substation`, `VoltageLevel`, `Bay`, `Line`, and `Process`. `EqFunction` elements can be allocated to equipment elements such as `PowerTransformer`, `ConductingEquipment`, and `GeneralEquipment`.
+
+This structured approach allows users to organize link:[logical node references] within the `Substation` section. For instance, to specify a distance protection within Bay 1 along with a general trip, one could directly reference Bay 1 as part of this hierarchy.
+
+[,xml]
+----
+
+<Bay name="bay1">
+    <LNode iedName="None" lnClass="PTRC" lnInst="1" lnType="somePTRCtype"/>
+    <LNode iedName="None" prefix="Zone1" lnClass="PDIS" lnInst="1" lnType="somePDIStype"/>
+    <LNode iedName="None" prefix="Zone2" lnClass="PDIS" lnInst="2" lnType="somePDIStype"/>
+    <LNode iedName="None" prefix="Zone3" lnClass="PDIS" lnInst="3" lnType="somePDIStype"/>
+    <LNode iedName="None" prefix="Zone4" lnClass="PDIS" lnInst="4" lnType="somePDIStype"/>
+</Bay>
+----
+
+While referencing logical nodes directly within a bay is acceptable, readability may become an issue as the number of logical node references grows. An alternative approach to improve readability is to implement the distance protection as follows:
+
+[,xml]
+----
+<Bay name="bay1">
+    <Function name="DistanceProtection">
+        <LNode iedName="None" lnClass="PTRC" lnInst="1" lnType="somePTRCtype"/>
+        <SubFunction name="Zone1">
+            <LNode iedName="None" lnClass="PDIS" lnInst="1" lnType="somePDIStype"/>
+        </SubFunction>
+        <SubFunction name="Zone2">
+            <LNode iedName="None" lnClass="PDIS" lnInst="1" lnType="somePDIStype"/>
+        </SubFunction>
+        <SubFunction name="Zone3">
+            <LNode iedName="None" lnClass="PDIS" lnInst="1" lnType="somePDIStype"/>
+        </SubFunction>
+        <SubFunction name="Zone4">
+            <LNode iedName="None" lnClass="PDIS" lnInst="1" lnType="somePDIStype"/>
+        </SubFunction>
+    </Function>
+</Bay>
+----
+
+An example illustrating the use of `EqFunction` could be as follows:
+
+[,xml]
+----
+<ConductingEquipment name="QB1" type="DIS">
+    <Function name="BubBarDisconnector">
+        <SubFunction name="Disconnector">
+            <LNode iedName="None" lnClass="XSWI" lnInst="1" lnType="someXSWItype"/>
+        </SubFunction>
+        <SubFunction name="Control">
+            <LNode iedName="None" lnClass="CSWI" lnInst="1" lnType="someCSWItype"/>
+        </SubFunction>
+        <SubFunction name="Interlocking">
+            <LNode iedName="None" lnClass="CILO" lnInst="1" lnType="someCILOtype"/>
+        </SubFunction>
+    </Function>
+</ConductingEquipment>
+----
+
+Can you infer its purpose? Would you be able to do so if these elements had been directly referenced in the bay along with the distance protection?
+
+NOTE: The logical device element (`LDevice`) in the IED serves a similar purpose to the function structure in the substation section. It is intended to organize logical nodes into groups. Consequently, the function structure can be transformed into logical devices. OpenSCD facilitates this transformation using link:[Create SPECIFICATION IED].
+
+*Create function structure in OpenSCD*
+https://github.com/openscd/open-scd/wiki/Function[Manipulate function type elements with OpenSCD]

@@ -1,0 +1,44 @@
+*Adding EnumVal:*
+
+To add a new `EnumVal` to an existing `EnumType` in OpenSCD, follow these steps:
+
+image::https://user-images.githubusercontent.com/66802940/132070327-26d452dc-f4b8-441a-aee3-0b57f521f76a.png[alt text,250]
+
+. Navigate to the `EnumType` to which you want to add an `EnumVal`, then open the *Edit EnumType* wizard.
+. Click on the *ENUM VALUE* button located within the wizard.
+
+_Settings_:
+
+. *ord**: This attribute must be unique within the EnumType.
+. *desc*: User-defined description field.
+. *value**: The enumeration value specified as a string.
+
+&nbsp;
+
+*Edit EnumVal*
+
+To modify an existing `EnumVal` element, follow these steps:
+
+. Navigate to the `EnumType` that contains the `EnumVal` you want to edit.
+. Open the *Edit EnumType* page and click on the `EnumVal` you want to edit to access the *Edit Enum* wizard.
+
+_Settings_:
+
+. *ord**: This attribute must be unique within the `EnumType`.
+. *desc*: User-defined description field.
+. *value**: The enumeration value specified as a string.
+
+&nbsp;
+
+_Example:_
+
+----
+<EnumVal ord="1">on</EnumVal>
+----
+
+*Remove EnumVal*
+
+Removing `EnumVal` from an `EnumType` may be necessary at times to align with vendor-specific data models. For instance, in the `BehaviorModeKind` enumeration, it is common to include only "on," "test," and "off" values, omitting "test/blocked" and "on-blocked" options.
+
+. Open the `EnumVal` you want to remove in the *Edit EnumVal* wizard.
+. Click on the *Remove* button.

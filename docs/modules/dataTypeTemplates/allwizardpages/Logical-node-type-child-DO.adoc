@@ -1,0 +1,55 @@
+*Add new DO*
+
+image::https://user-images.githubusercontent.com/66802940/132066144-6efe36e8-544e-487d-9bdf-70829ab878fd.png[alt text,250]
+
+You can utilize OpenSCD to incorporate new ``DO``'s instances into an existing `LNodeType`. Follow these steps:
+
+. Navigate to the desired `LNodeType` you wish to modify and open the *Edit LNodeType* wizard.
+. Click on the *DATA OBJECT* button located in the middle of the wizard interface.
+
+_Settings_:
+
+. *name**: When selecting a `DO` from the IEC&#8239;61850 namespace, consult IEC&#8239;61850&#x2011;7&#x2011;4. Otherwise, ensure that the name starts with an uppercase letter [A-Z].
+. *desc*: This field allows users to provide a user-defined description.
+. *type**: The type is specified as a string in the SCL but presented as a selector in OpenSCD. The selector displays all `DOType` - `id` available in the project. A `DO` cannot be created without an existing `DOType`.
+. *accessControl*: A user-defined string used to describe access control permissions.
+. *transient*: If the `DO` is from the IEC&#8239;61850 namespace, the transient attribute must adhere to the specifications outlined in IEC&#8239;61850&#x2011;7&#x2011;4. For example, `Tr` is used for the logical node class `PTRC`.
+
+____
+*CHECKS*: The schema validator covers missing or incorrect `name` attributes, while the template validator handles missing or incorrect `type` attributes.
+____
+
+image::https://user-images.githubusercontent.com/66802940/132067177-deffa835-b2e2-4e1a-9600-29bbad1996a7.png[alt text,250]
+
+*Edit DO*
+
+You can utilize OpenSCD to modify existing `DO` elements. Follow these steps:
+
+. Navigate to the list of ``LNodeType``s in the *template editor*.
+. Select the `LNodeType` containing the desired `DO` you wish to edit.
+. Click on the specific `DO` you wish to modify to open the *Edit DO* wizard.
+
+&nbsp;
+
+_Settings_:
+
+The settings available in the *Edit DO* wizard are the same as those in the *Add DO* wizard, with the addition of a remove button for removing the selected `DO`.
+
+_Example:_
+
+----
+<DO name="Mod" type="OpenSCD_ENCMod">
+----
+
+&nbsp;
+
+*Remove DO*
+
+To remove a DO from an existing LNodeType, follow these steps:
+
+. Open the *Edit DO* wizard by navigating to the LNodeType list in the template editor and clicking on the LNodeType that contains the DO you want to remove.
+. Within the Edit DO wizard, click on the *Remove* button.
+
+____
+*WARNING*: Be cautious when removing DOs, as OpenSCD does not perform validity checks before removal.
+____
