@@ -10,6 +10,10 @@ content:
       start_path: docs
       branches: HEAD
       version: true
+    - url: https://github.com/danyill/oscd-subscriber-later-binding
+      # start_path: docs
+      branches: main
+      version: true
 asciidoc:
   attributes:
     sectnums: ""
