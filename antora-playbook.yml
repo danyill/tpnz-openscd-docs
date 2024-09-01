@@ -21,8 +21,15 @@ asciidoc:
     idprefix: ""
     idseparator: "-"
     page-pagination: ""
+antora:
+  extensions:
+    - require: "@antora/lunr-extension"
 ui:
   bundle:
     # using default UI until later
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
+  supplemental_files: ./supplemental_ui
+  # an icon would be nice
+  # - path: favicon.ico
+  #   contents: ./supplemental-ui/favicon.ico
