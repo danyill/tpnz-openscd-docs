@@ -12,7 +12,11 @@ content:
       version: true
     - url: https://github.com/danyill/oscd-subscriber-later-binding
       # start_path: docs
-      branches: main
+      branches: [main, v*]
+      version: true
+    - url: https://github.com/danyill/oscd-supervision
+      # start_path: docs
+      branches: [main, v*]
       version: true
 asciidoc:
   attributes:
