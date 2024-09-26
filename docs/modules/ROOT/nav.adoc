@@ -2,9 +2,8 @@
 
 // xref:overview:ROOT:introduction.adoc[]
 
-include::installation:partial$nav.adoc[]
-include::workflow:partial$nav.adoc[]
-
+// include::installation:partial$nav.adoc[]
+// include::workflow:partial$nav.adoc[]
 
 // == 3. https://github.com/openscd/open-scd/wiki/Validators[Validators]
 

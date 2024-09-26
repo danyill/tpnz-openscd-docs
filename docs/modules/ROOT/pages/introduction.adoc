@@ -1,12 +1,19 @@
 = Introduction
- 
-This is an open repository of information on OpenSCD and IEC 61850-6. You are welcome to share your knowledge with the rest of the world, by clicking the Edit link in the top right corner 😄. 
-Welcome aboard!
+:sectnums!:
+:uri-license: https://raw.githubusercontent.com/transpower-nz/open-scd/refs/heads/main/LICENCE.md
+:uri-openenergytools: https://github.com/OpenEnergyTools
 
-You can find information related to topics like
+This documents Transpower's OpenSCD distribution.
 
-* xref:installation:Install-OpenSCD.adoc[]
-* xref:workflow:Project-workflow.adoc[]
+This distribution is based primarily on the work of the {uri-openenergytools}[OpenEnergyTools] organisation and a variety of community plugins.
+
+Subject to the {uri-license}[license], Transpower welcomes those interest to use, study, share and improve the distribution as well as this documentation.
+
+== Plugins
+
+* xref:oscd-subscriber-later-binding:ROOT:introduction.adoc[Subscriber Later Binding]
+
+* xref:oscd-supervision:ROOT:introduction.adoc[Supervision]
 
 // * https://github.com/openscd/open-scd/wiki/Validators[Validators used in OpenSCD]
 
